@@ -29,10 +29,10 @@ func _ready():
 func _process(delta):
 	time_taken += delta
 	ui.update_time(time_taken)
-	
+
 
 func after_ready():
-	#As the player is added to the tilemap, it needs to wait a frame for 
+	#As the player is added to the tilemap, it needs to wait a frame for
 	#everything to get ready!
 	player.set_up_camera_limit(boundry_rect)
 	starting_pos = player.position
@@ -79,16 +79,16 @@ func respawn():
 		player.global_position = current_checkpoint.global_position
 	else:
 		player.global_position = starting_pos
-	
+
 	for collectable in get_tree().get_nodes_in_group("collectable"):
 		collectable.collected = false
 	reset_score()
-	
+
 
 func _on_tile_map_child_entered_tree(node):
 	# Handle the noeds that are instanced by the tile map.
 	# Potential change - Have them added to the test level instead?
-	
+
 	if node.is_in_group("interactable"):
 		node.player_touched.connect(on_player_touched.bind(node))
 	if node.is_in_group("player"):
@@ -100,7 +100,7 @@ func _on_tile_map_child_entered_tree(node):
 		node.hit_body.connect(_on_hit_body.bind(node))
 
 func _on_hit_body(hitbody:Actor, hitter:Actor):
-	hitbody.take_hit(hitter) 
+	hitbody.take_hit(hitter)
 	hitter.react_to_hitting(hitbody)
 
 func _on_player_lost_health(_new_health):

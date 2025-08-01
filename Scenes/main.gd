@@ -9,6 +9,8 @@ var current_scene : Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+  DisplayServer.window_set_vsync_mode(DisplayServer.VSYNC_DISABLED);
+  Engine.max_fps = 60;
   change_to_main_menu()
   pass # Replace with function body.
 
@@ -19,7 +21,7 @@ func change_scene(new_parent: Node, new_child: Node):
   current_scene = new_child
 
 func change_to_level(new_level: LevelResource):
-  var level_scene : PackedScene = new_level.level_scene 
+  var level_scene : PackedScene = new_level.level_scene
   var level_to_load : BaseLevel = level_scene.instantiate()
   change_scene($LevelHolder, level_to_load)
   levels.increase_level_index()

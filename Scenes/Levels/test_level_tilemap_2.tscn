@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5inuexfj0d8k"]
+
+[ext_resource type="Script" uid="uid://bv27ksx4t615q" path="res://Scenes/Virtual/BaseLevel.gd" id="1_xy50i"]
+
+[node name="TestLevelTilemap2" type="Node2D"]
+script = ExtResource("1_xy50i")
+metadata/_custom_type_script = "uid://bv27ksx4t615q"

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ubm3g25m2mvs"]
 
-[ext_resource type="Script" path="res://Scenes/UI/level_ui.gd" id="1_0wvi5"]
+[ext_resource type="Script" uid="uid://btfux6q1nh2q2" path="res://Scenes/UI/level_ui.gd" id="1_0wvi5"]
 [ext_resource type="Texture2D" uid="uid://pgvp75401bfx" path="res://Assets/UI/hud_heartFull.png" id="2_s3qdv"]
 [ext_resource type="Theme" uid="uid://dxortrvrvcbys" path="res://Scenes/UI/score.tres" id="3_gqkha"]
 
