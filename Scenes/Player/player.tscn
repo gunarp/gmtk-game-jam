@@ -1,28 +1,30 @@
-[gd_scene load_steps=18 format=3 uid="uid://dk6a56e3n3mbc"]
+[gd_scene load_steps=17 format=3 uid="uid://dk6a56e3n3mbc"]
 
 [ext_resource type="PackedScene" uid="uid://cupi7qpibwqb1" path="res://Scenes/Virtual/actor.tscn" id="1_xtkr7"]
 [ext_resource type="Script" uid="uid://5igxx24o7jgk" path="res://Scenes/Player/player.gd" id="2_5gwpl"]
-[ext_resource type="Texture2D" uid="uid://c8dwd60f35vms" path="res://Assets/Player/old/p1_stand.png" id="3_bkssa"]
-[ext_resource type="Texture2D" uid="uid://btyqfdh3sw080" path="res://Assets/Player/old/p1_hurt.png" id="4_dxnfb"]
-[ext_resource type="Texture2D" uid="uid://kkorvrbhgs2j" path="res://Assets/Player/old/walk/p1_walk01.png" id="4_ov4l0"]
-[ext_resource type="Texture2D" uid="uid://bg7w40qiq40eh" path="res://Assets/Player/old/p1_jump.png" id="5_381ol"]
-[ext_resource type="Texture2D" uid="uid://bpuen0l3oje0j" path="res://Assets/Player/old/walk/p1_walk02.png" id="5_tiepq"]
-[ext_resource type="Texture2D" uid="uid://b324l45a1vn1a" path="res://Assets/Player/old/walk/p1_walk03.png" id="6_2mlv0"]
-[ext_resource type="Texture2D" uid="uid://ctxr2g4xkrq4m" path="res://Assets/Player/old/walk/p1_walk04.png" id="7_kjal2"]
-[ext_resource type="Texture2D" uid="uid://cku0flysvjd35" path="res://Assets/Player/old/walk/p1_walk05.png" id="8_l32pm"]
-[ext_resource type="Texture2D" uid="uid://fqc5ncpsbna4" path="res://Assets/Player/old/walk/p1_walk06.png" id="9_q2yl5"]
-[ext_resource type="Texture2D" uid="uid://tcapj3gl3trt" path="res://Assets/Player/old/walk/p1_walk07.png" id="10_cxfx5"]
-[ext_resource type="Texture2D" uid="uid://3k6xckrq1ddr" path="res://Assets/Player/old/walk/p1_walk10.png" id="11_djo24"]
-[ext_resource type="Texture2D" uid="uid://oskjfdq2ento" path="res://Assets/Player/old/walk/p1_walk11.png" id="12_xmdyi"]
+[ext_resource type="Texture2D" uid="uid://cf8k66156ylwv" path="res://Assets/Player/idle_right_1.png" id="3_r5xpd"]
+[ext_resource type="Texture2D" uid="uid://sxfqxicgxxcq" path="res://Assets/Player/idle_right_2.png" id="4_ks1b7"]
+[ext_resource type="Texture2D" uid="uid://bwodp4w6swaf4" path="res://Assets/Player/idle_left_1.png" id="5_qr1w5"]
+[ext_resource type="Texture2D" uid="uid://bum2d0x3d1akp" path="res://Assets/Player/walk_right_1.png" id="5_rqdc0"]
+[ext_resource type="Texture2D" uid="uid://bgywfdlk0ty1i" path="res://Assets/Player/walk_right_2.png" id="6_qr1w5"]
+[ext_resource type="Texture2D" uid="uid://bvc8x8i2wry2j" path="res://Assets/Player/walk_right_3.png" id="7_ythyg"]
+[ext_resource type="Texture2D" uid="uid://bbauacblqp7r4" path="res://Assets/Player/walk_right_4.png" id="8_bmb2s"]
+[ext_resource type="Texture2D" uid="uid://c5c1igig2kubn" path="res://Assets/Player/walk_right_5.png" id="9_ur3l4"]
+[ext_resource type="Texture2D" uid="uid://cofpubry5svqf" path="res://Assets/Player/walk_right_6.png" id="10_2ahak"]
+[ext_resource type="Texture2D" uid="uid://curlrogm0ctde" path="res://Assets/Player/walk_right_7.png" id="11_rukb4"]
+[ext_resource type="Texture2D" uid="uid://ldwi4qi3y8vl" path="res://Assets/Player/walk_right_8.png" id="12_4no11"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbkd8"]
 size = Vector2(38, 73)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_dkb7f"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_hnuln"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_bkssa")
+"texture": ExtResource("3_r5xpd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ks1b7")
 }],
 "loop": true,
 "name": &"default",
@@ -30,7 +32,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_dxnfb")
+"texture": ExtResource("5_qr1w5")
 }],
 "loop": true,
 "name": &"fall",
@@ -38,7 +40,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_dxnfb")
+"texture": ExtResource("5_qr1w5")
 }],
 "loop": true,
 "name": &"hurt",
@@ -46,7 +48,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_381ol")
+"texture": ExtResource("5_qr1w5")
 }],
 "loop": true,
 "name": &"jump",
@@ -54,31 +56,28 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_ov4l0")
+"texture": ExtResource("5_rqdc0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_tiepq")
+"texture": ExtResource("6_qr1w5")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_2mlv0")
+"texture": ExtResource("7_ythyg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_kjal2")
+"texture": ExtResource("8_bmb2s")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_l32pm")
+"texture": ExtResource("9_ur3l4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_q2yl5")
+"texture": ExtResource("10_2ahak")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_cxfx5")
+"texture": ExtResource("11_rukb4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_djo24")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_xmdyi")
+"texture": ExtResource("12_4no11")
 }],
 "loop": true,
 "name": &"walk",
@@ -97,14 +96,20 @@ coyote_time_frames = 6
 jump_time_frames = 6
 friction = 0.428
 acceleration = 0.715
+speed = 150.0
+jump_height = 30.0
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, 9.5)
 shape = SubResource("RectangleShape2D_jbkd8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
-sprite_frames = SubResource("SpriteFrames_dkb7f")
+position = Vector2(3.125, 9.375)
+scale = Vector2(2.21429, 2.21429)
+sprite_frames = SubResource("SpriteFrames_hnuln")
 animation = &"walk"
+frame = 6
+frame_progress = 0.119206
 
 [node name="Timers" type="Node" parent="." index="2"]
 

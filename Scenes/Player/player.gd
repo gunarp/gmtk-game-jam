@@ -7,8 +7,6 @@ class_name Player
 
 #Taken from Kids Can Code - https://kidscancode.org/godot_recipes/4.x/2d/platform_character/index.html
 
-# @onready var camera: Camera2D = $Camera2D
-
 @export_range(0.0, 1.0) var friction = 0.1
 @export_range(0.0, 1.0) var acceleration = 0.25
 
@@ -27,7 +25,6 @@ func _ready():
   super ()
   %CoyoteTimer.wait_time = coyote_frames / 60.
   %JumpBufferTimer.wait_time = jump_time_frames / 60.
-  # SceneTransition.target = self
 
 
 func handle_animation(_delta):
@@ -59,6 +56,7 @@ func handle_physics(_delta):
   # Handle Jump.
 
   handle_jump()
+  handle_dash()
 
   # Get the input direction and handle the movement/deceleration.
   var direction = Input.get_axis("move_left", "move_right")
@@ -79,6 +77,11 @@ func handle_jump():
     if coyote:
       coyote = false
 
+func handle_dash():
+  pass
+
+  # if Input.is_action_just_pressed("dash"):
+  #   var dash_dir = vector2()
 
 func handle_cols():
   super ()
