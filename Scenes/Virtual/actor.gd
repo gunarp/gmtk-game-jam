@@ -23,14 +23,18 @@ var last_velocity: Vector2
 #Signals
 signal hit_body(body)
 
+
 func calculate_jump_velocity(distance):
 	return -sqrt(2 * gravity * distance)
+
 
 func _ready():
 	pass
 
+
 func _process(delta):
 	handle_animation(delta)
+
 
 func _physics_process(delta):
 	# The physics is split into multiple segments, to make sure each
@@ -40,7 +44,11 @@ func _physics_process(delta):
 
 	handle_gravity(delta)
 	handle_physics(delta)
+	# print(velocity)
+	# print(position)
 	move_and_slide()
+	print(get_slide_collision_count())
+	# print(move_and_collide(velocity))
 	#Handle all the collisions that have happened
 	handle_cols()
 
@@ -48,14 +56,18 @@ func _physics_process(delta):
 func handle_physics(_delta):
 	pass
 
+
 func handle_animation(_delta):
 	pass
+
 
 func handle_gravity(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
+
 func handle_cols():
+	# print(get_slide_collision_count())
 	for i in get_slide_collision_count():
 		var c = get_slide_collision(i)
 		if c.get_collider() is RigidBody2D:
@@ -67,11 +79,12 @@ func _on_hitbox_body_entered(body):
 		hit_body.emit(body)
 	pass # Replace with function body.
 
-#These functions are used when one actor "hits" another actor
 
+#These functions are used when one actor "hits" another actor
 func take_hit(_hitter):
 	queue_free()
 	pass
+
 
 func react_to_hitting(_hitbody):
 	pass

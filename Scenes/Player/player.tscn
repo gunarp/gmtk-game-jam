@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dk6a56e3n3mbc"]
+[gd_scene load_steps=18 format=3 uid="uid://dk6a56e3n3mbc"]
 
 [ext_resource type="PackedScene" uid="uid://cupi7qpibwqb1" path="res://Scenes/Virtual/actor.tscn" id="1_xtkr7"]
 [ext_resource type="Script" uid="uid://5igxx24o7jgk" path="res://Scenes/Player/player.gd" id="2_5gwpl"]
@@ -88,14 +88,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xvbrh"]
 size = Vector2(36, 22)
 
-[sub_resource type="Animation" id="Animation_xj5sw"]
-resource_name = "Die"
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a07yp"]
-_data = {
-&"Die": SubResource("Animation_xj5sw")
-}
-
 [node name="Player" groups=["player"] instance=ExtResource("1_xtkr7")]
 scale = Vector2(0.32, 0.32)
 collision_layer = 10
@@ -112,13 +104,9 @@ shape = SubResource("RectangleShape2D_jbkd8")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_dkb7f")
-animation = &"hurt"
+animation = &"walk"
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
-limit_smoothed = true
-drag_horizontal_enabled = true
-
-[node name="Timers" type="Node" parent="." index="3"]
+[node name="Timers" type="Node" parent="." index="2"]
 
 [node name="CoyoteTimer" type="Timer" parent="Timers" index="0"]
 unique_name_in_owner = true
@@ -131,17 +119,12 @@ one_shot = true
 [node name="JumpHoldTimer" type="Timer" parent="Timers" index="2"]
 unique_name_in_owner = true
 
-[node name="Hitbox" parent="." index="4"]
+[node name="Hitbox" parent="." index="3"]
 collision_layer = 10
 collision_mask = 6
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(0, 45)
 shape = SubResource("RectangleShape2D_xvbrh")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
-libraries = {
-&"": SubResource("AnimationLibrary_a07yp")
-}
 
 [connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
