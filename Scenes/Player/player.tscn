@@ -1,19 +1,19 @@
 [gd_scene load_steps=20 format=3 uid="uid://dk6a56e3n3mbc"]
 
 [ext_resource type="PackedScene" uid="uid://cupi7qpibwqb1" path="res://Scenes/Virtual/actor.tscn" id="1_xtkr7"]
-[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="2_5gwpl"]
-[ext_resource type="Texture2D" uid="uid://cbc0u4raftue6" path="res://Assets/Player/p1_stand.png" id="3_bkssa"]
-[ext_resource type="Texture2D" uid="uid://dug8xgnhnogbd" path="res://Assets/Player/p1_hurt.png" id="4_dxnfb"]
-[ext_resource type="Texture2D" uid="uid://bsaxjqyg8la07" path="res://Assets/Player/p1_walk/p1_walk01.png" id="4_ov4l0"]
-[ext_resource type="Texture2D" uid="uid://crvjvnh7kvwek" path="res://Assets/Player/p1_jump.png" id="5_381ol"]
-[ext_resource type="Texture2D" uid="uid://b2dk0thfml85w" path="res://Assets/Player/p1_walk/p1_walk02.png" id="5_tiepq"]
-[ext_resource type="Texture2D" uid="uid://dj0457f7f6a2m" path="res://Assets/Player/p1_walk/p1_walk03.png" id="6_2mlv0"]
-[ext_resource type="Texture2D" uid="uid://ck0myu6i6k6tq" path="res://Assets/Player/p1_walk/p1_walk04.png" id="7_kjal2"]
-[ext_resource type="Texture2D" uid="uid://d2y7j5vk11wgg" path="res://Assets/Player/p1_walk/p1_walk05.png" id="8_l32pm"]
-[ext_resource type="Texture2D" uid="uid://dvrsrkyuu4to3" path="res://Assets/Player/p1_walk/p1_walk06.png" id="9_q2yl5"]
-[ext_resource type="Texture2D" uid="uid://c4uftb3phpsfy" path="res://Assets/Player/p1_walk/p1_walk07.png" id="10_cxfx5"]
-[ext_resource type="Texture2D" uid="uid://b210b2hdr0bjm" path="res://Assets/Player/p1_walk/p1_walk10.png" id="11_djo24"]
-[ext_resource type="Texture2D" uid="uid://cgcxsn1pwxfiy" path="res://Assets/Player/p1_walk/p1_walk11.png" id="12_xmdyi"]
+[ext_resource type="Script" uid="uid://5igxx24o7jgk" path="res://Scenes/Player/player.gd" id="2_5gwpl"]
+[ext_resource type="Texture2D" uid="uid://c8dwd60f35vms" path="res://Assets/Player/old/p1_stand.png" id="3_bkssa"]
+[ext_resource type="Texture2D" uid="uid://btyqfdh3sw080" path="res://Assets/Player/old/p1_hurt.png" id="4_dxnfb"]
+[ext_resource type="Texture2D" uid="uid://kkorvrbhgs2j" path="res://Assets/Player/old/walk/p1_walk01.png" id="4_ov4l0"]
+[ext_resource type="Texture2D" uid="uid://bg7w40qiq40eh" path="res://Assets/Player/old/p1_jump.png" id="5_381ol"]
+[ext_resource type="Texture2D" uid="uid://bpuen0l3oje0j" path="res://Assets/Player/old/walk/p1_walk02.png" id="5_tiepq"]
+[ext_resource type="Texture2D" uid="uid://b324l45a1vn1a" path="res://Assets/Player/old/walk/p1_walk03.png" id="6_2mlv0"]
+[ext_resource type="Texture2D" uid="uid://ctxr2g4xkrq4m" path="res://Assets/Player/old/walk/p1_walk04.png" id="7_kjal2"]
+[ext_resource type="Texture2D" uid="uid://cku0flysvjd35" path="res://Assets/Player/old/walk/p1_walk05.png" id="8_l32pm"]
+[ext_resource type="Texture2D" uid="uid://fqc5ncpsbna4" path="res://Assets/Player/old/walk/p1_walk06.png" id="9_q2yl5"]
+[ext_resource type="Texture2D" uid="uid://tcapj3gl3trt" path="res://Assets/Player/old/walk/p1_walk07.png" id="10_cxfx5"]
+[ext_resource type="Texture2D" uid="uid://3k6xckrq1ddr" path="res://Assets/Player/old/walk/p1_walk10.png" id="11_djo24"]
+[ext_resource type="Texture2D" uid="uid://oskjfdq2ento" path="res://Assets/Player/old/walk/p1_walk11.png" id="12_xmdyi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbkd8"]
 size = Vector2(38, 73)
@@ -93,10 +93,11 @@ resource_name = "Die"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a07yp"]
 _data = {
-"Die": SubResource("Animation_xj5sw")
+&"Die": SubResource("Animation_xj5sw")
 }
 
 [node name="Player" groups=["player"] instance=ExtResource("1_xtkr7")]
+scale = Vector2(0.32, 0.32)
 collision_layer = 10
 collision_mask = 15
 script = ExtResource("2_5gwpl")
@@ -104,7 +105,6 @@ coyote_time_frames = 6
 jump_time_frames = 6
 friction = 0.428
 acceleration = 0.715
-jump_height = 175
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(0, 9.5)
@@ -141,7 +141,7 @@ shape = SubResource("RectangleShape2D_xvbrh")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 libraries = {
-"": SubResource("AnimationLibrary_a07yp")
+&"": SubResource("AnimationLibrary_a07yp")
 }
 
 [connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

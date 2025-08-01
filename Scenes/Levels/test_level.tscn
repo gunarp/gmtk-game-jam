@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://t7yg1qyt4ndo"]
+[gd_scene load_steps=15 format=4 uid="uid://du24mdv1fxbog"]
 
 [ext_resource type="PackedScene" uid="uid://vsxauni78yw6" path="res://Scenes/Virtual/BaseLevel.tscn" id="1_qix1k"]
 [ext_resource type="Texture2D" uid="uid://j5pv7xx2nmjf" path="res://Assets/Tiles/platformer_tileset_a.png" id="2_hyk2w"]
