@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=4 uid="uid://dflss4gn1r0gx"]
+[gd_scene load_steps=28 format=4 uid="uid://dflss4gn1r0gx"]
 
 [ext_resource type="Script" uid="uid://d1nd21mdc8nsa" path="res://Scenes/main.gd" id="1_bo77m"]
+[ext_resource type="Texture2D" uid="uid://cwprrvtc1gayp" path="res://Assets/platformer_background.png" id="2_3pmx8"]
 [ext_resource type="Script" uid="uid://ibtf0t7foxlt" path="res://Scenes/character.gd" id="3_8gbba"]
 [ext_resource type="Texture2D" uid="uid://bwodp4w6swaf4" path="res://Assets/Player/idle_left_1.png" id="3_ee4r6"]
 [ext_resource type="Texture2D" uid="uid://ca80fiu405fdo" path="res://Assets/Player/idle_left_2.png" id="4_gt3je"]
@@ -219,6 +220,11 @@ sources/0 = SubResource("TileSetAtlasSource_3pmx8")
 
 [node name="Main" type="Node"]
 script = ExtResource("1_bo77m")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_3pmx8")
 
 [node name="LevelHolder" type="Node2D" parent="."]
 
