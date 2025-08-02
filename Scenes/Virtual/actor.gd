@@ -37,19 +37,19 @@ func _process(delta):
 
 
 func get_state() -> PackedFloat32Array:
-	var ret: PackedFloat32Array
-	ret.append(position.x)
-	ret.append(position.y)
-	ret.append(velocity.x)
-	ret.append(velocity.y)
-	return ret
+  var ret: PackedFloat32Array
+  ret.append(position.x)
+  ret.append(position.y)
+  ret.append(velocity.x)
+  ret.append(velocity.y)
+  return ret
 
 
 func load_state(_state: PackedFloat32Array):
-	position.x = _state[0]
-	position.y = _state[1]
-	velocity.x = _state[2]
-	velocity.y = _state[3]
+  position.x = _state[0]
+  position.y = _state[1]
+  velocity.x = _state[2]
+  velocity.y = _state[3]
 
 
 func _physics_process(delta):

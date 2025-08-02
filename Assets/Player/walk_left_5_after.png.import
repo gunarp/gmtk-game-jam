@@ -1,17 +1,17 @@
 [remap]
 
 importer="texture"
-type="CompressedTexture2D
-uid="uid://b4alh7ljtgfdx"
-path="res://.godot/imported/platformer_tileset_b.png-9d65af523f63dbf30ff3e93ae3d50941.ctex"
+type="CompressedTexture2D"
+uid="uid://bjowhegw6cmnh"
+path="res://.godot/imported/walk_left_5_after.png-fc64ae4fb06accfd2a7f5ac71a95c5ba.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tiles/platformer_tileset_b.png"
-dest_files=["res://.godot/imported/platformer_tileset_b.png-9d65af523f63dbf30ff3e93ae3d50941.ctex"]
+source_file="res://Assets/Player/walk_left_5_after.png"
+dest_files=["res://.godot/imported/walk_left_5_after.png-fc64ae4fb06accfd2a7f5ac71a95c5ba.ctex"]
 
 [params]
 
