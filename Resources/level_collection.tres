@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="LevelCollectionResource" load_steps=8 format=3 uid="uid://cp8wrxwjud0b1"]
+[gd_resource type="Resource" script_class="LevelCollectionResource" load_steps=9 format=3 uid="uid://cp8wrxwjud0b1"]
 
 [ext_resource type="Script" uid="uid://cs6fg6y2qqyvj" path="res://Resources/Scripts/level_collection.gd" id="1_hkkd7"]
 [ext_resource type="Script" uid="uid://c356ujgh4qrfv" path="res://Resources/Scripts/level_resource.gd" id="2_c5tna"]
-[ext_resource type="PackedScene" uid="uid://kkecqv8ey0of" path="res://Scenes/Levels/enemy_test_level.tscn" id="3_fyoy1"]
+[ext_resource type="PackedScene" uid="uid://di30mv4npivm6" path="res://Scenes/Levels/level1.tscn" id="3_cbg87"]
 [ext_resource type="PackedScene" uid="uid://calmux6wahgo7" path="res://Scenes/Levels/test_level_tiles.tscn" id="4_cbg87"]
+[ext_resource type="PackedScene" uid="uid://dxm0isvn5gx1f" path="res://Scenes/Levels/level2.tscn" id="4_x57wc"]
 
 [sub_resource type="Resource" id="Resource_x57wc"]
 script = ExtResource("2_c5tna")
@@ -14,13 +15,13 @@ metadata/_custom_type_script = "uid://c356ujgh4qrfv"
 [sub_resource type="Resource" id="Resource_u4yq5"]
 script = ExtResource("2_c5tna")
 level_name = "Level 2"
-level_scene = ExtResource("3_fyoy1")
+level_scene = ExtResource("3_cbg87")
 metadata/_custom_type_script = "uid://c356ujgh4qrfv"
 
 [sub_resource type="Resource" id="Resource_fyoy1"]
 script = ExtResource("2_c5tna")
 level_name = "Level 3"
-level_scene = ExtResource("4_cbg87")
+level_scene = ExtResource("4_x57wc")
 metadata/_custom_type_script = "uid://c356ujgh4qrfv"
 
 [resource]
