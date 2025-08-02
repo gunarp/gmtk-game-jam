@@ -16,9 +16,10 @@ var health = 3
 var jumping = true
 
 # Class velocity
-var calculated_velocity: Vector2 = Vector2.ZERO;
-var move_cooldown: Vector2 = Vector2.ZERO;
-var is_dash_active: bool = false;
+var calculated_velocity: Vector2 = Vector2.ZERO
+var move_cooldown: Vector2 = Vector2.ZERO
+var is_dash_active: bool = false
+var can_dash: bool = true
 
 #Coyote code based on KIDS CAN CODE
 #https://kidscancode.org/godot_recipes/4.x/2d/coyote_time/index.html
@@ -57,7 +58,9 @@ func handle_gravity(delta):
 
 
 func handle_physics(delta):
+  # TODO: think about a way to funnel inputs into here outside of a regular loop
   if is_on_floor():
+    can_dash = true
     jumping = false
   # Handle Jump.
 
@@ -70,8 +73,6 @@ func handle_physics(delta):
         calculated_velocity.x = lerp(calculated_velocity.x, direction * speed, acceleration)
       else:
         calculated_velocity.x = lerp(calculated_velocity.x, 0.0, friction)
-
-  handle_freeze()
 
   # Do all calculations on the tracked calculated_velocity
 
@@ -89,6 +90,12 @@ func handle_physics(delta):
   move_cooldown.y = move_toward(move_cooldown.y, 0, delta)
 
 
+func load_state(_state: PackedFloat32Array):
+  calculated_velocity.x = _state[2]
+  calculated_velocity.y = _state[3]
+  super (_state)
+
+
 func handle_jump():
   if Input.is_action_just_pressed("jump"):
     %JumpBufferTimer.start()
@@ -104,6 +111,13 @@ func handle_jump():
 
 func handle_dash():
   if Input.is_action_just_pressed("dash"):
+    if not can_dash:
+      print("couldn't dash")
+      return
+    if is_dash_active:
+      print("alreayd dashing")
+      return
+
     var input_vect = Vector2(
       Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
       Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
@@ -111,7 +125,7 @@ func handle_dash():
 
     var default_dash_direction = Vector2(1, 0) if not $AnimatedSprite2D.flip_h else Vector2(-1, 0)
     var dash_direction = default_dash_direction if input_vect == Vector2.ZERO else input_vect
-    print("dash requested, direction: ", dash_direction)
+    # print("dash requested, direction: ", dash_direction)
     # var dash_dir = vector2()
 
     var dash_multiplier = Vector2.ONE
@@ -122,26 +136,23 @@ func handle_dash():
       dash_multiplier.x = Constants.Dash_left_scale;
 
     if dash_direction.y < 0:
-      print("up")
       dash_multiplier.y = Constants.Dash_up_scale;
     elif dash_direction.y > 0:
-      print("down")
       dash_multiplier.y = Constants.Dash_down_scale;
 
     # print("dashing in direction of: ", dash_direction)
     calculated_velocity = dash_direction * Constants.Dash_Strength * dash_multiplier * 60
-    print("dashed, old velocity: ", velocity, " dash velocity:", calculated_velocity)
+    # print("dashed, old velocity: ", velocity, " dash velocity:", calculated_velocity)
 
     move_cooldown = Vector2(0.5, 1) * Constants.Dash_input_cooldown
     is_dash_active = true
+    can_dash = false
     # asynchronously wait on timer to complete
+    print("dash_start")
     await get_tree().create_timer(Constants.Dash_Strength * Constants.Dash_input_cooldown).timeout
+    print("dash_end")
     is_dash_active = false
 
-
-func handle_freeze():
-  if Input.is_action_just_pressed("freeze"):
-    print("freeze frame requested")
 
 func handle_cols():
   super ()
