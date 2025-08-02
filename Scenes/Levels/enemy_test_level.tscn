@@ -3,3 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://vsxauni78yw6" path="res://Scenes/Virtual/BaseLevel.tscn" id="1_b8j67"]
 
 [node name="EnemyTestLevel" instance=ExtResource("1_b8j67")]
+
+[node name="LevelUI" parent="." index="1"]
+visible = true

@@ -15,10 +15,21 @@ var level_resource: LevelResource
 
 var current_checkpoint: Checkpoint
 
+# Indexed by frame
+var timeline: Array[Dictionary]
+var num_timelines_looped: int = 0
+var current_timeline_pos: int = 0
+const MAX_TIMELIINE_LENGTH: int = 6000
+
+var is_paused: bool = false
+
 signal level_ended
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+  # prefill the timeline
+  timeline.resize(MAX_TIMELIINE_LENGTH)
+
   var cell_size: Vector2i = $ForegroundLayer.tile_set.tile_size
   boundry_rect = Rect2i($ForegroundLayer.get_used_rect()).abs()
 #	boundry_rect = boundry_rect.grow_side(SIDE_TOP, 500)
@@ -26,6 +37,7 @@ func _ready():
   boundry_rect.position *= cell_size
 
   # $Player.set_up_camera_limit(boundry_rect)
+  $TimelineMenu.connect("unfreeze", on_unfreeze)
   after_ready.call_deferred()
 
 
@@ -33,12 +45,63 @@ func _process(delta):
   time_taken += delta
   ui.update_time(time_taken)
 
+  handle_freeze()
+  # Save all freezable game object states in timeline
+  # TODO: determine if every frame is actually necessary to save
+
+  for child in get_children():
+    if child.has_method("get_state"):
+      timeline[current_timeline_pos][child.get_instance_id()] = FrozenState.new(child.get_state())
+      # print("state stored, id:", child.get_instance_id(), " state: ", timeline[current_timeline_pos][child.get_instance_id()])
+
+
+  current_timeline_pos = current_timeline_pos + 1
+  if current_timeline_pos == MAX_TIMELIINE_LENGTH:
+    current_timeline_pos = 0
+    num_timelines_looped += 1
+
 
 func after_ready():
   #As the player is added to the tilemap, it needs to wait a frame for
   #everything to get ready!
   # $Player.set_up_camera_limit(boundry_rect)
   starting_pos = $Player.position
+
+
+# Toggles pause state and applies it to subtree
+func _toggle_pause_subtree():
+  is_paused = not is_paused
+  print("toggling paused to: ", is_paused)
+  if is_paused:
+    $TimelineMenu.show()
+    $TimelineMenu.display_frames_on_pause(timeline, current_timeline_pos, num_timelines_looped, MAX_TIMELIINE_LENGTH)
+  else:
+    $TimelineMenu.hide()
+  get_tree().paused = is_paused
+
+
+func handle_freeze():
+  if Input.is_action_just_pressed("freeze"):
+    if not is_paused:
+      _toggle_pause_subtree()
+
+
+func on_unfreeze(unfreeze_frame):
+  _toggle_pause_subtree()
+  # TODO: extract to another function
+  # once frame selected, load from timeline and discard
+  # future states
+  unfreeze_at_frame(unfreeze_frame)
+
+
+func unfreeze_at_frame(dest_frame: int = maxi(0, current_timeline_pos - 60)):
+  for child in get_children():
+    if child.has_method("load_state"):
+      print("dest_frame: ", num_timelines_looped * MAX_TIMELIINE_LENGTH + dest_frame)
+      var state: FrozenState = timeline[dest_frame][child.get_instance_id()]
+      current_timeline_pos = dest_frame
+      print("loadingstate: ", state.frozenState)
+      child.load_state(state.frozenState)
 
 
 func on_player_touched(node: Interactable):
@@ -88,9 +151,9 @@ func respawn():
     # if the player has multiple collisions with a death zone
     return
 
-  remove_child($Player)
-  var player: Player = player_scene.instantiate()
-  add_child(player)
+  # remove_child($Player)
+  # var player: Player = player_scene.instantiate()
+  # add_child(player)
   $Player.position = starting_pos
   respawning = false
 
