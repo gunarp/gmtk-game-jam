@@ -1,3 +1,24 @@
+[gd_scene load_steps=2 format=4 uid="uid://h83hqj7nwmmk"]
+
+
+[node name="DeathLayer" parent="." index="5"]
+tile_map_data = PackedByteArray("AAAWABUAAQAAAAAAAQAXABUAAQAAAAAAAQAYABUAAQAAAAAAAQAZABUAAQAAAAAAAQAaABUAAQAAAAAAAQAbABUAAQAAAAAAAQAcABUAAQAAAAAAAQAdABUAAQAAAAAAAQAeABUAAQAAAAAAAQAfABUAAQAAAAAAAQAgABUAAQAAAAAAAQAhABUAAQAAAAAAAQAiABUAAQAAAAAAAQAjABUAAQAAAAAAAQAkABUAAQAAAAAAAQA=")
+
+[connection signal="body_entered" from="DeathLayer/DeathZone" to="DeathLayer/DeathZone" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180310" to="DeathLayer/@Area2D@180310" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180311" to="DeathLayer/@Area2D@180311" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180312" to="DeathLayer/@Area2D@180312" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180313" to="DeathLayer/@Area2D@180313" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180314" to="DeathLayer/@Area2D@180314" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180315" to="DeathLayer/@Area2D@180315" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180316" to="DeathLayer/@Area2D@180316" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180317" to="DeathLayer/@Area2D@180317" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180318" to="DeathLayer/@Area2D@180318" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180319" to="DeathLayer/@Area2D@180319" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180320" to="DeathLayer/@Area2D@180320" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180321" to="DeathLayer/@Area2D@180321" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180322" to="DeathLayer/@Area2D@180322" method="_on_body_entered"]
+[connection signal="body_entered" from="DeathLayer/@Area2D@180323" to="DeathLayer/@Area2D@180323" method="_on_body_entered"]
 
 [gd_scene load_steps=2 format=4 uid="uid://ju4yr7xlfjvb"]
 
@@ -33,3 +54,4 @@ tile_map_data = PackedByteArray("AAAPABUAAAAAAAAAAQAQABUAAAAAAAAAAQARABUAAAAAAAA
 [connection signal="body_entered" from="DeathZone/@Area2D@56061" to="DeathZone/@Area2D@56061" method="_on_body_entered"]
 [connection signal="body_entered" from="DeathZone/@Area2D@56062" to="DeathZone/@Area2D@56062" method="_on_body_entered"]
 [connection signal="body_entered" from="DeathZone/@Area2D@56063" to="DeathZone/@Area2D@56063" method="_on_body_entered"]
+
