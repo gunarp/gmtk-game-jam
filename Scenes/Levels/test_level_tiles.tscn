@@ -10,3 +10,4 @@ tile_map_data = PackedByteArray("AAAAAA0AAAAAAAAAAAABAA0AAAAAAAAAAAACAA0AAAAAAAA
 
 [node name="Player" parent="." index="2"]
 position = Vector2(49, 81)
+acceleration = 0.25

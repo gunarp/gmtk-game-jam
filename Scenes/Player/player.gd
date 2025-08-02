@@ -51,7 +51,7 @@ func handle_animation(_delta):
 func handle_gravity(delta):
   if velocity.y > 0:
     delta *= 1.5
-  if not is_on_floor():
+  if not is_dash_active and not is_on_floor():
     calculated_velocity.y += gravity * delta
   pass
 
@@ -61,19 +61,21 @@ func handle_physics(delta):
     jumping = false
   # Handle Jump.
 
-  handle_jump()
-  handle_dash()
+  if not is_dash_active:
+    handle_jump()
+    handle_dash()
+    var direction = Input.get_axis("move_left", "move_right")
+    if move_cooldown.x <= 0:
+      if direction:
+        calculated_velocity.x = lerp(calculated_velocity.x, direction * speed, acceleration)
+      else:
+        calculated_velocity.x = lerp(calculated_velocity.x, 0.0, friction)
+
   handle_freeze()
 
   # Do all calculations on the tracked calculated_velocity
 
   # Get the input direction and handle the movement/deceleration.
-  var direction = Input.get_axis("move_left", "move_right")
-  if move_cooldown.x <= 0:
-    if direction:
-      calculated_velocity.x = lerp(calculated_velocity.x, direction * speed, acceleration)
-    else:
-      calculated_velocity.x = lerp(calculated_velocity.x, 0.0, friction)
 
   velocity = calculated_velocity
   move_and_slide()

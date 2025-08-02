@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Actor
 
-const DEFAULT_SPEED = 300.0
+const DEFAULT_SPEED = 100.0
 const DEFAULT_JUMP_HEIGHT = 2.5
 const TILESIZE = Vector2(70, 70)
 
