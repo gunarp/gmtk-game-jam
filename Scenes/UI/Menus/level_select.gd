@@ -8,7 +8,6 @@ signal level_selected(level)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
 	pass # Replace with function body.
 
 func add_level(level:LevelResource):
@@ -24,7 +23,7 @@ func add_all_levels(level_res:LevelCollectionResource):
 
 func emit_level_selected(level):
 	level_selected.emit(level)
-	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
