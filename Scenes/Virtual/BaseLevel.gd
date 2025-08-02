@@ -86,12 +86,12 @@ func handle_freeze():
       _toggle_pause_subtree()
 
 
-func on_unfreeze():
+func on_unfreeze(unfreeze_frame):
   _toggle_pause_subtree()
   # TODO: extract to another function
   # once frame selected, load from timeline and discard
   # future states
-  unfreeze_at_frame()
+  unfreeze_at_frame(unfreeze_frame)
 
 
 func unfreeze_at_frame(dest_frame: int = maxi(0, current_timeline_pos - 60)):
