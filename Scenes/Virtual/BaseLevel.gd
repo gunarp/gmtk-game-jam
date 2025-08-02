@@ -21,6 +21,8 @@ var num_timelines_looped: int = 0
 var current_timeline_pos: int = 0
 const MAX_TIMELIINE_LENGTH: int = 6000
 
+var is_paused: bool = false
+
 signal level_ended
 
 # Called when the node enters the scene tree for the first time.
@@ -35,6 +37,7 @@ func _ready():
   boundry_rect.position *= cell_size
 
   # $Player.set_up_camera_limit(boundry_rect)
+  $TimelineMenu.connect("unfreeze", on_unfreeze)
   after_ready.call_deferred()
 
 
@@ -65,24 +68,40 @@ func after_ready():
   starting_pos = $Player.position
 
 
+# Toggles pause state and applies it to subtree
+func _toggle_pause_subtree():
+  is_paused = not is_paused
+  print("toggling paused to: ", is_paused)
+  if is_paused:
+    $TimelineMenu.show()
+    $TimelineMenu.display_frames_on_pause(timeline, current_timeline_pos, num_timelines_looped, MAX_TIMELIINE_LENGTH)
+  else:
+    $TimelineMenu.hide()
+  get_tree().paused = is_paused
+
+
 func handle_freeze():
   if Input.is_action_just_pressed("freeze"):
-    # print("freeze frame requested")
+    if not is_paused:
+      _toggle_pause_subtree()
 
-    # freeze all freezable children
 
-    # TODO: extract to another function
-    # once frame selected, load from timeline and discard
-    # future states
-    for child in get_children():
-      if child.has_method("load_state"):
+func on_unfreeze():
+  _toggle_pause_subtree()
+  # TODO: extract to another function
+  # once frame selected, load from timeline and discard
+  # future states
+  unfreeze_at_frame()
 
-        var dest_frame = maxi(0, current_timeline_pos - 60)
-        print("dest_frame: ", num_timelines_looped * MAX_TIMELIINE_LENGTH + dest_frame)
-        var state: FrozenState = timeline[dest_frame][child.get_instance_id()]
-        current_timeline_pos = dest_frame
-        print("loading state: ", state.frozenState)
-        child.load_state(state.frozenState)
+
+func unfreeze_at_frame(dest_frame: int = maxi(0, current_timeline_pos - 60)):
+  for child in get_children():
+    if child.has_method("load_state"):
+      print("dest_frame: ", num_timelines_looped * MAX_TIMELIINE_LENGTH + dest_frame)
+      var state: FrozenState = timeline[dest_frame][child.get_instance_id()]
+      current_timeline_pos = dest_frame
+      print("loadingstate: ", state.frozenState)
+      child.load_state(state.frozenState)
 
 
 func on_player_touched(node: Interactable):
