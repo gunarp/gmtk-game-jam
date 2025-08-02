@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://u2fh1xedqj88"]
 
-[ext_resource type="Script" path="res://Scenes/Virtual/interactable.gd" id="1_w2t8p"]
+[ext_resource type="Script" uid="uid://c5juwaat87r8j" path="res://Scenes/Virtual/interactable.gd" id="1_w2t8p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l7ihv"]
-size = Vector2(70, 70)
+size = Vector2(8, 8)
 
 [node name="Area2D" type="Area2D" groups=["interactable"]]
 collision_mask = 3
