@@ -8,6 +8,8 @@ var levelscore = 0
 var time_taken = 0
 var starting_pos: Vector2
 
+var respawning: bool = false
+
 var level_resource: LevelResource
 @onready var ui := $LevelUI
 
@@ -75,20 +77,22 @@ func activate_checkpoint(node):
 
 
 func kill_player():
+  respawning = true
   respawn.call_deferred()
 
 
 func respawn():
-  print("respawn")
+  if !respawning:
+    # Minor optimization to only respawn once
+    # This function might get invoked multiple times
+    # if the player has multiple collisions with a death zone
+    return
+
   remove_child($Player)
-  var player : Player = player_scene.instantiate()
+  var player: Player = player_scene.instantiate()
   add_child(player)
   $Player.position = starting_pos
-  # player.set_up_camera_limit(boundry_rect)
-  # if current_checkpoint:
-  #   player.global_position = current_checkpoint.global_position
-  # else:
-  #   player.global_position = starting_pos
+  respawning = false
 
   # for collectable in get_tree().get_nodes_in_group("collectable"):
   #   collectable.collected = false

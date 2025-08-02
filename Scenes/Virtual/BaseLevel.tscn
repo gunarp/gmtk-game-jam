@@ -288,5 +288,6 @@ tile_set = SubResource("TileSet_2ptkc")
 visible = false
 
 [node name="Player" parent="." instance=ExtResource("2_2wr2r")]
+coyote_time_frames = 3
 
 [connection signal="child_entered_tree" from="ForegroundLayer" to="." method="_on_tile_map_child_entered_tree"]

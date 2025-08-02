@@ -7,8 +7,9 @@ extends Sprite2D
 func _ready():
   $PlayerAnimation.play("idle_right")
 
-func _physics_process(delta):
-  velocity.y += gravity * delta #Gravity every frame
- 
-  velocity.x = Input.get_axis("left", "right") * speed
-  move_and_slide()
+func _physics_process(_delta):
+  # velocity.y += gravity * delta #Gravity every frame
+
+  # velocity.x = Input.get_axis("left", "right") * speed
+  # move_and_slide()
+  pass

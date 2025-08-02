@@ -44,13 +44,6 @@ func _physics_process(delta):
 
 	handle_gravity(delta)
 	handle_physics(delta)
-	# print(velocity)
-	# print(position)
-	move_and_slide()
-	print(get_slide_collision_count())
-	# print(move_and_collide(velocity))
-	#Handle all the collisions that have happened
-	handle_cols()
 
 
 func handle_physics(_delta):
@@ -61,9 +54,10 @@ func handle_animation(_delta):
 	pass
 
 
-func handle_gravity(delta):
-	if not is_on_floor():
-		velocity.y += gravity * delta
+func handle_gravity(_delta):
+	pass
+	# if not is_on_floor():
+	# 	velocity.y += gravity * delta
 
 
 func handle_cols():

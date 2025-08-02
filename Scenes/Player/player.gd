@@ -15,15 +15,19 @@ var health = 3
 
 var jumping = true
 
+# Class velocity
+var calculated_velocity: Vector2 = Vector2.ZERO;
+var move_cooldown: Vector2 = Vector2.ZERO;
+var is_dash_active: bool = false;
+
 #Coyote code based on KIDS CAN CODE
 #https://kidscancode.org/godot_recipes/4.x/2d/coyote_time/index.html
 
-var coyote_frames = 30 # How many in-air frames to allow jumping
 var coyote = false # Track whether we're in coyote time or not
 
 func _ready():
   super ()
-  %CoyoteTimer.wait_time = coyote_frames / 60.
+  %CoyoteTimer.wait_time = coyote_time_frames / 60.
   %JumpBufferTimer.wait_time = jump_time_frames / 60.
 
 
@@ -47,41 +51,95 @@ func handle_animation(_delta):
 func handle_gravity(delta):
   if velocity.y > 0:
     delta *= 1.5
-  super (delta)
+  if not is_on_floor():
+    calculated_velocity.y += gravity * delta
   pass
 
-func handle_physics(_delta):
+
+func handle_physics(delta):
   if is_on_floor():
     jumping = false
   # Handle Jump.
 
   handle_jump()
   handle_dash()
+  handle_freeze()
+
+  # Do all calculations on the tracked calculated_velocity
 
   # Get the input direction and handle the movement/deceleration.
   var direction = Input.get_axis("move_left", "move_right")
-  if direction:
-    velocity.x = lerp(velocity.x, direction * speed, acceleration)
-  else:
-    velocity.x = lerp(velocity.x, 0.0, friction)
+  if move_cooldown.x <= 0:
+    if direction:
+      calculated_velocity.x = lerp(calculated_velocity.x, direction * speed, acceleration)
+    else:
+      calculated_velocity.x = lerp(calculated_velocity.x, 0.0, friction)
+
+  velocity = calculated_velocity
+  move_and_slide()
+  #Handle all the collisions that have happened
+  handle_cols()
+
+  # store velocity for next frame's calculations
+  calculated_velocity = velocity
+
+  move_cooldown.x = move_toward(move_cooldown.x, 0, delta)
+  move_cooldown.y = move_toward(move_cooldown.y, 0, delta)
+
 
 func handle_jump():
   if Input.is_action_just_pressed("jump"):
     %JumpBufferTimer.start()
-  if Input.is_action_just_released("jump") and velocity.y < 0:
-    velocity.y *= 0.25
+  if Input.is_action_just_released("jump") and calculated_velocity.y < 0:
+    calculated_velocity.y *= 0.25
   if (not %JumpBufferTimer.is_stopped()) and (is_on_floor() or coyote):
-    velocity.y = jump_vel
+    calculated_velocity.y = jump_vel
     %JumpBufferTimer.stop()
     jumping = true
     if coyote:
       coyote = false
 
-func handle_dash():
-  pass
 
-  # if Input.is_action_just_pressed("dash"):
-  #   var dash_dir = vector2()
+func handle_dash():
+  if Input.is_action_just_pressed("dash"):
+    var input_vect = Vector2(
+      Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+      Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+    )
+
+    var default_dash_direction = Vector2(1, 0) if not $AnimatedSprite2D.flip_h else Vector2(-1, 0)
+    var dash_direction = default_dash_direction if input_vect == Vector2.ZERO else input_vect
+    print("dash requested, direction: ", dash_direction)
+    # var dash_dir = vector2()
+
+    var dash_multiplier = Vector2.ONE
+
+    if dash_direction.x > 0:
+      dash_multiplier.x = Constants.Dash_right_scale;
+    elif dash_direction.x < 0:
+      dash_multiplier.x = Constants.Dash_left_scale;
+
+    if dash_direction.y < 0:
+      print("up")
+      dash_multiplier.y = Constants.Dash_up_scale;
+    elif dash_direction.y > 0:
+      print("down")
+      dash_multiplier.y = Constants.Dash_down_scale;
+
+    # print("dashing in direction of: ", dash_direction)
+    calculated_velocity = dash_direction * Constants.Dash_Strength * dash_multiplier * 60
+    print("dashed, old velocity: ", velocity, " dash velocity:", calculated_velocity)
+
+    move_cooldown = Vector2(0.5, 1) * Constants.Dash_input_cooldown
+    is_dash_active = true
+    # asynchronously wait on timer to complete
+    await get_tree().create_timer(Constants.Dash_Strength * Constants.Dash_input_cooldown).timeout
+    is_dash_active = false
+
+
+func handle_freeze():
+  if Input.is_action_just_pressed("freeze"):
+    print("freeze frame requested")
 
 func handle_cols():
   super ()
