@@ -5,6 +5,9 @@ extends Control
 
 @export var level_name := "Level X":
   set(value):
+
+    print(value)
+
     level_name = value
     $VBoxContainer/Button.text = value
 

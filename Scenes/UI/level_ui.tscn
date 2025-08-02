@@ -1,8 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://ubm3g25m2mvs"]
+[gd_scene load_steps=6 format=3 uid="uid://ubm3g25m2mvs"]
 
 [ext_resource type="Script" uid="uid://btfux6q1nh2q2" path="res://Scenes/UI/level_ui.gd" id="1_0wvi5"]
 [ext_resource type="Texture2D" uid="uid://pgvp75401bfx" path="res://Assets/UI/hud_heartFull.png" id="2_s3qdv"]
 [ext_resource type="Theme" uid="uid://dxortrvrvcbys" path="res://Scenes/UI/score.tres" id="3_gqkha"]
+
+[sub_resource type="Gradient" id="Gradient_tk1ol"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m0wgp"]
+gradient = SubResource("Gradient_tk1ol")
 
 [node name="LevelUI" type="CanvasLayer"]
 script = ExtResource("1_0wvi5")
@@ -25,6 +32,7 @@ grow_vertical = 2
 
 [node name="HealthContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -55,6 +63,7 @@ stretch_mode = 5
 
 [node name="ScoreContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -74,6 +83,7 @@ vertical_alignment = 1
 
 [node name="TimeContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -89,3 +99,15 @@ theme = ExtResource("3_gqkha")
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="OptionsContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="OptionsMenuButton" type="Button" parent="Control/HBoxContainer/OptionsContainer"]
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 8
+icon = SubResource("GradientTexture2D_m0wgp")
