@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://dk6a56e3n3mbc"]
+[gd_scene load_steps=16 format=3 uid="uid://dk6a56e3n3mbc"]
 
 [ext_resource type="PackedScene" uid="uid://cupi7qpibwqb1" path="res://Scenes/Virtual/actor.tscn" id="1_xtkr7"]
 [ext_resource type="Script" uid="uid://5igxx24o7jgk" path="res://Scenes/Player/player.gd" id="2_5gwpl"]
 [ext_resource type="Texture2D" uid="uid://cf8k66156ylwv" path="res://Assets/Player/idle_right_1.png" id="3_r5xpd"]
 [ext_resource type="Texture2D" uid="uid://sxfqxicgxxcq" path="res://Assets/Player/idle_right_2.png" id="4_ks1b7"]
-[ext_resource type="Texture2D" uid="uid://bwodp4w6swaf4" path="res://Assets/Player/idle_left_1.png" id="5_qr1w5"]
 [ext_resource type="Texture2D" uid="uid://bum2d0x3d1akp" path="res://Assets/Player/walk_right_1.png" id="5_rqdc0"]
 [ext_resource type="Texture2D" uid="uid://bgywfdlk0ty1i" path="res://Assets/Player/walk_right_2.png" id="6_qr1w5"]
 [ext_resource type="Texture2D" uid="uid://bvc8x8i2wry2j" path="res://Assets/Player/walk_right_3.png" id="7_ythyg"]
@@ -32,7 +31,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_qr1w5")
+"texture": ExtResource("3_r5xpd")
 }],
 "loop": true,
 "name": &"fall",
@@ -40,7 +39,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_qr1w5")
+"texture": ExtResource("3_r5xpd")
 }],
 "loop": true,
 "name": &"hurt",
@@ -48,7 +47,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_qr1w5")
+"texture": ExtResource("3_r5xpd")
 }],
 "loop": true,
 "name": &"jump",
@@ -107,9 +106,7 @@ shape = SubResource("RectangleShape2D_jbkd8")
 position = Vector2(3.125, 9.375)
 scale = Vector2(2.21429, 2.21429)
 sprite_frames = SubResource("SpriteFrames_hnuln")
-animation = &"walk"
-frame = 6
-frame_progress = 0.119206
+animation = &"jump"
 
 [node name="Timers" type="Node" parent="." index="2"]
 
