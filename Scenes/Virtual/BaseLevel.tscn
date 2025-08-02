@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://vsxauni78yw6"]
+[gd_scene load_steps=14 format=3 uid="uid://vsxauni78yw6"]
 
 [ext_resource type="Script" uid="uid://bv27ksx4t615q" path="res://Scenes/Virtual/BaseLevel.gd" id="1_gi0ax"]
 [ext_resource type="PackedScene" uid="uid://dk6a56e3n3mbc" path="res://Scenes/Player/player.tscn" id="2_2wr2r"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bsa8sgay28e88" path="res://Scenes/Interactables/death_zone.tscn" id="7_0fme4"]
 [ext_resource type="PackedScene" uid="uid://dgq8aqvhj6bte" path="res://Scenes/Interactables/crate.tscn" id="8_vveao"]
 [ext_resource type="PackedScene" uid="uid://ubm3g25m2mvs" path="res://Scenes/UI/level_ui.tscn" id="9_ksn3r"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/Menus/TimelineMenu.tscn" id="10_5do6m"]
 [ext_resource type="Texture2D" uid="uid://j5pv7xx2nmjf" path="res://Assets/Tiles/platformer_tileset_a.png" id="10_dxyf0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7a78t"]
@@ -262,7 +263,7 @@ terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetScenesCollectionSource_muqlf")
 sources/0 = SubResource("TileSetAtlasSource_7a78t")
 
-[node name="Level" type="Node2D"]
+[node name="Level2" type="Node2D"]
 script = ExtResource("1_gi0ax")
 
 [node name="ForegroundLayer" type="TileMapLayer" parent="."]
@@ -274,5 +275,9 @@ visible = false
 
 [node name="Player" parent="." instance=ExtResource("2_2wr2r")]
 coyote_time_frames = 3
+
+[node name="TimelineMenu" parent="." instance=ExtResource("10_5do6m")]
+process_mode = 2
+visible = false
 
 [connection signal="child_entered_tree" from="ForegroundLayer" to="." method="_on_tile_map_child_entered_tree"]
