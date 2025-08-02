@@ -1,5 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://vsxauni78yw6"]
-
+[gd_scene load_steps=19 format=3 uid="uid://vsxauni78yw6"]
 
 [ext_resource type="Script" uid="uid://bv27ksx4t615q" path="res://Scenes/Virtual/BaseLevel.gd" id="1_gi0ax"]
 [ext_resource type="PackedScene" uid="uid://dk6a56e3n3mbc" path="res://Scenes/Player/player.tscn" id="2_2wr2r"]
@@ -11,9 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bsa8sgay28e88" path="res://Scenes/Interactables/death_zone.tscn" id="7_0fme4"]
 [ext_resource type="PackedScene" uid="uid://dgq8aqvhj6bte" path="res://Scenes/Interactables/crate.tscn" id="8_vveao"]
 [ext_resource type="PackedScene" uid="uid://ubm3g25m2mvs" path="res://Scenes/UI/level_ui.tscn" id="9_ksn3r"]
-
-
-[ext_resource type="PackedScene" path="res://Scenes/UI/Menus/TimelineMenu.tscn" id="10_5do6m"]
+[ext_resource type="PackedScene" uid="uid://bj55icmoje7k6" path="res://Scenes/UI/Menus/TimelineMenu.tscn" id="10_5do6m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7a78t"]
 resource_name = "Tiles"
@@ -248,7 +245,6 @@ texture_region_size = Vector2i(8, 8)
 12:5/0 = 0
 0:6/0 = 0
 1:6/0 = 0
-
 1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 24:0/0 = 0
 25:0/0 = 0
@@ -402,7 +398,6 @@ texture_region_size = Vector2i(8, 8)
 9:12/0 = 0
 10:12/0 = 0
 
-
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_muqlf"]
 resource_name = "Interactables"
 scenes/1/scene = ExtResource("3_24241")
@@ -420,7 +415,6 @@ terrain_set_0/terrain_0/name = "Ground"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetScenesCollectionSource_muqlf")
 sources/0 = SubResource("TileSetAtlasSource_7a78t")
-
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5do6m"]
 texture = ExtResource("2_8hefe")
@@ -550,8 +544,7 @@ scenes/1/scene = ExtResource("7_0fme4")
 tile_size = Vector2i(8, 8)
 sources/0 = SubResource("TileSetScenesCollectionSource_7a78t")
 
-[node name="Level" type="Node2D"]
-
+[node name="Level2" type="Node2D"]
 script = ExtResource("1_gi0ax")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -572,7 +565,6 @@ visible = false
 
 [node name="Player" parent="." instance=ExtResource("2_2wr2r")]
 coyote_time_frames = 3
-
 
 [node name="DeathZone" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_opudp")
