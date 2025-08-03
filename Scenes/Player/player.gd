@@ -33,20 +33,20 @@ func _ready():
 
 
 func handle_animation(_delta):
-  if is_on_floor():
-    if velocity.x > 5:
-      $AnimatedSprite2D.play("walk")
-      $AnimatedSprite2D.flip_h = false
-    elif velocity.x < -5:
-      $AnimatedSprite2D.play("walk")
-      $AnimatedSprite2D.flip_h = true
-    else:
-      $AnimatedSprite2D.play("default")
+  # if is_on_floor():
+  if velocity.x > 5:
+    $AnimatedSprite2D.play("walk")
+    $AnimatedSprite2D.flip_h = false
+  elif velocity.x < -5:
+    $AnimatedSprite2D.play("walk")
+    $AnimatedSprite2D.flip_h = true
   else:
-    if velocity.y < 0:
-      $AnimatedSprite2D.play("jump")
-    else:
-      $AnimatedSprite2D.play("fall")
+    $AnimatedSprite2D.play("default")
+  # else:
+  #   if velocity.y < 0:
+  #     $AnimatedSprite2D.play("jump")
+  #   else:
+  #     $AnimatedSprite2D.play("fall")
 
 
 func handle_gravity(delta):

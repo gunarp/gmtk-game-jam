@@ -70,7 +70,6 @@ vertical_scroll_mode = 0
 
 [node name="FrameContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
-layout_direction = 3
 layout_mode = 2
 size_flags_vertical = 6
 theme_override_constants/separation = 20

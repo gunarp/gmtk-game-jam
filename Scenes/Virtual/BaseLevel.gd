@@ -19,7 +19,7 @@ var current_checkpoint: Checkpoint
 var timeline: Array[Dictionary]
 var num_timelines_looped: int = 0
 var current_timeline_pos: int = 0
-const MAX_TIMELIINE_LENGTH: int = 6000
+const MAX_TIMELIINE_LENGTH: int = 600
 
 var is_paused: bool = false
 

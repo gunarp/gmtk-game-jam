@@ -29,30 +29,7 @@ class EmptyMargin extends MarginContainer:
 
 func _ready() -> void:
   outline_mat.shader = preload("res://Resources/2d_outline.gdshader")
-
-  _set_selection()
   visibility_changed.connect(_on_visibility_changed)
-
-  #EXTRACT
-  # for child in scroll_container.get_children():
-  #   child.queue_free()
-
-  frame_container.add_child(EmptyMargin.new())
-
-  # Set children of frame_container to be selectable frames... for now just use a placeholder asset
-  var new_child = TextureRect.new()
-  new_child.texture = load("res://Assets/UI/hud_heartFull.png")
-
-  num_frames = 0
-  for i in range(6):
-    var copy = new_child.duplicate()
-    frame_container.add_child(copy)
-    num_frames += 1
-
-  frame_container.add_child(EmptyMargin.new())
-
-  max_scroll = (_get_space_between() * (num_frames - 1))
-  #EXTRACT
 
   # move scroll position to end, after ScrollContainer is ready
   # set_scroll_at_end.call_deferred()
@@ -71,20 +48,52 @@ func _on_visibility_changed():
     ignore_input = true
 
 
+func generate_frames_for_contianer(timeline: Array[Dictionary], current_timeline_pos: int, max_frames: int) -> void:
+  if frame_container != null:
+    for child in frame_container.get_children():
+      if child != null:
+        child.queue_free()
+
+  frame_container.add_child(EmptyMargin.new())
+
+  # Set children of frame_container to be selectable frames... for now just use a placeholder asset
+  var new_child = TextureRect.new()
+  new_child.texture = load("res://Assets/UI/hud_heartFull.png")
+
+  # naieve approach - add all frames
+  # the end of the array is current_timeline_pos and loops around
+  # to current_timeline_pos + 1, or the first spot where
+  # the value of the timeline is null
+
+  num_frames = 0
+
+  # foolishly load in the array in reverse order
+  for i in range(current_timeline_pos + 1, max_frames):
+    if timeline[i] == null:
+      break
+
+    frame_container.add_child(new_child.duplicate())
+    num_frames += 1
+
+  for i in range(0, current_timeline_pos + 1):
+    frame_container.add_child(new_child.duplicate())
+    num_frames += 1
+
+  # for i in range(6):
+  #   var copy = new_child.duplicate()
+  #   frame_container.add_child(copy)
+  #   num_frames += 1
+
+  frame_container.add_child(EmptyMargin.new())
+
+  max_scroll = (_get_space_between() * (num_frames - 1))
+
 func display_frames_on_pause(timeline: Array[Dictionary], current_timeline_pos: int, num_timelines_looped: int, max_frames: int) -> void:
   print("stopped on frame: ", num_timelines_looped * max_frames + current_timeline_pos)
   print(timeline[current_timeline_pos])
 
+  generate_frames_for_contianer(timeline, current_timeline_pos, max_frames)
   set_scroll_at_end()
-  # trying to dynamically generate a texture - failing !
-  # var test_texture = load("res://Assets/Player/walk_left_7.png")
-  # var temp = TextureRect.new()
-  # temp.texture = test_texture
-  # temp.visible = true
-  # frame_container.add_child(temp)
-  # for item in frame_container.get_children():
-  #   print(item.name)
-  # populat ethe contents of the frame_container with the timeline
 
 
 func _process(_delta: float) -> void:
@@ -114,8 +123,6 @@ func _set_selection():
 func _on_previous_button_pressed() -> void:
   var scrollValue = max(targetScroll - _get_space_between(), min_scroll)
 
-  print("previous: ", scrollValue)
-
   await _tween_scroll(scrollValue)
 
   _select_deselect_highlight()
@@ -123,8 +130,6 @@ func _on_previous_button_pressed() -> void:
 
 func _on_next_button_pressed() -> void:
   var scrollValue = min(targetScroll + _get_space_between(), max_scroll)
-
-  print("next: ", scrollValue)
 
   await _tween_scroll(scrollValue)
 
