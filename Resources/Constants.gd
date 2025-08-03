@@ -55,10 +55,10 @@ const Wall_JumpBuffer: float = .1;
 
 const Dash_Strength: float = 2.5;
 const Dash_input_cooldown: float = .1;
-const Dash_up_scale: float = .75;
+const Dash_up_scale: float = .6;
 const Dash_down_scale: float = 1;
-const Dash_right_scale: float = 1;
-const Dash_left_scale: float = 1;
+const Dash_right_scale: float = 1.2;
+const Dash_left_scale: float = 1.2;
 const Dash_Count: float = 1;
 
 ## the time allowed to jump when falling from platforms.
@@ -69,3 +69,19 @@ const JumpBuffer: float = .15;
 const EdgeCheckDistance: float = 8;
 ## pushing the character around the corner when the character's head hits the corner.
 const CornerCorrectionSize: float = 3;
+
+
+static func calculate_dash_from_input(_input: Vector2) -> Vector2:
+  var dash_multiplier = Vector2.ONE
+
+  if _input.x > 0:
+    dash_multiplier.x = Constants.Dash_right_scale;
+  elif _input.x < 0:
+    dash_multiplier.x = Constants.Dash_left_scale;
+
+  if _input.y < 0:
+    dash_multiplier.y = Constants.Dash_up_scale;
+  elif _input.y > 0:
+    dash_multiplier.y = Constants.Dash_down_scale;
+
+  return _input * Constants.Dash_Strength * dash_multiplier * 60

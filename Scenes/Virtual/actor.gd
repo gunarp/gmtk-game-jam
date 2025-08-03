@@ -45,7 +45,7 @@ func get_state() -> PackedFloat32Array:
   return ret
 
 
-func load_state(_state: PackedFloat32Array):
+func load_state(_fnum: int, _state: PackedFloat32Array, _unfreeze_input: Vector2):
   position.x = _state[0]
   position.y = _state[1]
   velocity.x = _state[2]
