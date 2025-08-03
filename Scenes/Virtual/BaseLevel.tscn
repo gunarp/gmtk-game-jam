@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://vsxauni78yw6"]
+[gd_scene load_steps=23 format=3 uid="uid://vsxauni78yw6"]
 
 [ext_resource type="Script" uid="uid://bv27ksx4t615q" path="res://Scenes/Virtual/BaseLevel.gd" id="1_gi0ax"]
 [ext_resource type="PackedScene" uid="uid://dk6a56e3n3mbc" path="res://Scenes/Player/player.tscn" id="2_2wr2r"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bj55icmoje7k6" path="res://Scenes/UI/Menus/TimelineMenu.tscn" id="10_5do6m"]
 [ext_resource type="Texture2D" uid="uid://dywoc30qdqiuh" path="res://Assets/UI/vhs_overlay_resized.png" id="11_dxyf0"]
 [ext_resource type="PackedScene" uid="uid://cx1jiuxax5257" path="res://Scenes/Interactables/wincon.tscn" id="11_i12xl"]
+[ext_resource type="AudioStream" uid="uid://bcpgiuadc36h3" path="res://Assets/Audio/SFX/dash_1.mp3" id="12_l80dd"]
 [ext_resource type="AudioStream" uid="uid://b0hm5n1ytu0g5" path="res://Assets/Audio/Music/vaporwave_1.ogg" id="13_opudp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5do6m"]
@@ -884,6 +885,7 @@ position = Vector2(285, 125)
 
 [node name="Player" parent="." instance=ExtResource("2_2wr2r")]
 coyote_time_frames = 3
+dash_sfx_stream = ExtResource("12_l80dd")
 
 [node name="DeathLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_7a78t")

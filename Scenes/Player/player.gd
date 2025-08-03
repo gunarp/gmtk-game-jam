@@ -9,6 +9,7 @@ class_name Player
     preload("res://Assets/Audio/SFX/vinyl_step_3.mp3"),
     preload("res://Assets/Audio/SFX/vinyl_step_4.mp3")
 ]
+@export var dash_sfx_stream := preload("res://Assets/Audio/SFX/dash_1.mp3")
 
 
 #Taken from Kids Can Code - https://kidscancode.org/godot_recipes/4.x/2d/platform_character/index.html
@@ -38,6 +39,7 @@ var coyote = false # Track whether we're in coyote time or not
 
 func _ready():
   super ()
+  $DashSFX.stream = dash_sfx_stream
   %CoyoteTimer.wait_time = coyote_time_frames / 60.
   %JumpBufferTimer.wait_time = jump_time_frames / 60.
 
@@ -148,7 +150,9 @@ func handle_dash():
     if is_dash_active:
       print("alreayd dashing")
       return
-
+    # Play dash sound
+    $DashSFX.play()
+    
     var input_vect = Vector2(
       Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
       Input.get_action_strength("move_down") - Input.get_action_strength("move_up")

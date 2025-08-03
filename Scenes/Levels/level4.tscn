@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=4 uid="uid://285dcxv4ritm"]
+[gd_scene load_steps=4 format=4 uid="uid://285dcxv4ritm"]
 
 [ext_resource type="PackedScene" uid="uid://vsxauni78yw6" path="res://Scenes/Virtual/BaseLevel.tscn" id="1_0kce2"]
 [ext_resource type="AudioStream" uid="uid://b0hm5n1ytu0g5" path="res://Assets/Audio/Music/vaporwave_1.ogg" id="2_n5v07"]
+[ext_resource type="AudioStream" uid="uid://bcpgiuadc36h3" path="res://Assets/Audio/SFX/dash_1.mp3" id="3_2wdis"]
 
 [node name="Level" instance=ExtResource("1_0kce2")]
 level_music = ExtResource("2_n5v07")
@@ -23,6 +24,7 @@ position = Vector2(253, 49)
 
 [node name="Player" parent="." index="5"]
 position = Vector2(8, 96)
+dash_sfx_stream = ExtResource("3_2wdis")
 
 [node name="DeathLayer" parent="." index="6"]
 tile_map_data = PackedByteArray("AAADABQAAQAAAAAAAQAEABQAAQAAAAAAAQAFABQAAQAAAAAAAQAGABQAAQAAAAAAAQAHABQAAQAAAAAAAQAIABQAAQAAAAAAAQAJABQAAQAAAAAAAQAKABQAAQAAAAAAAQALABQAAQAAAAAAAQAMABQAAQAAAAAAAQANABQAAQAAAAAAAQAOABQAAQAAAAAAAQAPABQAAQAAAAAAAQAQABQAAQAAAAAAAQARABQAAQAAAAAAAQASABQAAQAAAAAAAQATABQAAQAAAAAAAQAUABQAAQAAAAAAAQAVABQAAQAAAAAAAQAWABQAAQAAAAAAAQAXABQAAQAAAAAAAQAYABQAAQAAAAAAAQAZABQAAQAAAAAAAQAaABQAAQAAAAAAAQAbABQAAQAAAAAAAQAcABQAAQAAAAAAAQAdABQAAQAAAAAAAQAeABQAAQAAAAAAAQAfABQAAQAAAAAAAQAgABQAAQAAAAAAAQAhABQAAQAAAAAAAQAiABQAAQAAAAAAAQAjABQAAQAAAAAAAQAkABQAAQAAAAAAAQAlABQAAQAAAAAAAQAmABQAAQAAAAAAAQAnABQAAQAAAAAAAQA=")
