@@ -1,6 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bj55icmoje7k6"]
+[gd_scene load_steps=5 format=3 uid="uid://bj55icmoje7k6"]
 
 [ext_resource type="Script" uid="uid://cspxdivlh0v1" path="res://Scenes/UI/Menus/timeline_menu.gd" id="1_ghed6"]
+[ext_resource type="Shader" uid="uid://dtseh8vnerxu2" path="res://Resources/2d_grayscale.gdshader" id="2_ghed6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ghed6"]
+shader = ExtResource("2_ghed6")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aigt0"]
 
@@ -12,8 +16,20 @@ offset_right = 320.0
 offset_bottom = 180.0
 script = ExtResource("1_ghed6")
 
+[node name="GrayscaleFilter" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="GrayscaleFilter"]
+material = SubResource("ShaderMaterial_ghed6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
 [node name="PanelContainer" type="PanelContainer" parent="."]
-self_modulate = Color(1, 1, 1, 0.392157)
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

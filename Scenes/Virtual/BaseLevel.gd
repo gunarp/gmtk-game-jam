@@ -75,7 +75,7 @@ func after_ready():
 # Toggles pause state and applies it to subtree
 func _toggle_pause_subtree():
   is_paused = not is_paused
-  print("toggling paused to: ", is_paused)
+  # print("toggling paused to: ", is_paused)
   if is_paused:
     $TimelineMenu.display_frames_on_pause(timeline, current_timeline_pos, num_timelines_looped, MAX_TIMELIINE_LENGTH)
   else:
@@ -101,11 +101,11 @@ func on_unfreeze(unfreeze_frame, toggle_pause):
 func unfreeze_at_frame(dest_frame: int = maxi(0, current_timeline_pos - 60)):
   for child in get_children():
     if child.has_method("load_state"):
-      print("dest_frame: ", num_timelines_looped * MAX_TIMELIINE_LENGTH + dest_frame)
+      # print("dest_frame: ", num_timelines_looped * MAX_TIMELIINE_LENGTH + dest_frame)
       var state: FrozenState = timeline[dest_frame][child.get_instance_id()]
       current_timeline_pos = dest_frame
-      print("loadingstate: ", state.frozenState)
-      child.load_state(state.frozenState)
+      # print("loadingstate: ", state.frozenState)
+      child.load_state(current_timeline_pos + (num_timelines_looped * MAX_TIMELIINE_LENGTH), state.frozenState)
 
 
 func on_player_touched(node: Interactable):

@@ -52,6 +52,9 @@ func set_scroll_at_end():
 func _on_visibility_changed():
   if is_visible_in_tree():
     ignore_input = true
+    $GrayscaleFilter.show()
+  else:
+    $GrayscaleFilter.hide()
 
 
 func generate_frames_for_container(timeline: Array[Dictionary], current_timeline_pos: int, max_frames: int) -> void:
@@ -87,10 +90,9 @@ func generate_frames_for_container(timeline: Array[Dictionary], current_timeline
   max_scroll = (_get_space_between() * (num_frames - 1))
 
 
-func display_frames_on_pause(timeline: Array[Dictionary], current_timeline_pos: int, num_timelines_looped: int, max_frames: int) -> void:
+func display_frames_on_pause(timeline: Array[Dictionary], current_timeline_pos: int, _num_timelines_looped: int, max_frames: int) -> void:
   # print("stopped on frame: ", num_timelines_looped * max_frames + current_timeline_pos)
   # print(timeline[current_timeline_pos])
-
   generate_frames_for_container(timeline, current_timeline_pos, max_frames)
   set_scroll_at_end()
 
@@ -136,7 +138,6 @@ func _process(_delta: float) -> void:
     if not Input.is_action_pressed("scrub_back") and not Input.is_action_pressed("scrub_forward"):
       scrub_debounce_timer.stop()
       can_scrub = true
-
 
 
 func _refresh_preview():

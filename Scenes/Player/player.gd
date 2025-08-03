@@ -21,6 +21,8 @@ var move_cooldown: Vector2 = Vector2.ZERO
 var is_dash_active: bool = false
 var can_dash: bool = true
 
+var last_loaded_frame: int = 0
+
 #Coyote code based on KIDS CAN CODE
 #https://kidscancode.org/godot_recipes/4.x/2d/coyote_time/index.html
 
@@ -33,7 +35,6 @@ func _ready():
 
 
 func handle_animation(_delta):
-  # if is_on_floor():
   if velocity.x > 5:
     $AnimatedSprite2D.play("walk")
     $AnimatedSprite2D.flip_h = false
@@ -90,10 +91,40 @@ func handle_physics(delta):
   move_cooldown.y = move_toward(move_cooldown.y, 0, delta)
 
 
-func load_state(_state: PackedFloat32Array):
+func advance_animation(step: int):
+  var next_frame = $AnimatedSprite2D.frame + step
+
+  if next_frame >= $AnimatedSprite2D.sprite_frames.get_frame_count($AnimatedSprite2D.animation):
+    next_frame = 0
+  elif next_frame < 0:
+    next_frame = $AnimatedSprite2D.sprite_frames.get_frame_count($AnimatedSprite2D.animation) - 1
+
+  $AnimatedSprite2D.frame = next_frame
+
+
+func load_state(_fnum: int, _state: PackedFloat32Array):
   calculated_velocity.x = _state[2]
   calculated_velocity.y = _state[3]
-  super (_state)
+  super (_fnum, _state)
+  # probably want a custom animation handler here
+
+  # if x velocity is nonzero, apply a walk cycle change
+  var animation_step = 1 if _fnum > last_loaded_frame else -1
+
+  if calculated_velocity.x > 5:
+    $AnimatedSprite2D.play("walk")
+    $AnimatedSprite2D.flip_h = false
+  elif calculated_velocity.x < -5:
+    $AnimatedSprite2D.play("walk")
+    $AnimatedSprite2D.flip_h = true
+  else:
+    $AnimatedSprite2D.play("default")
+
+  advance_animation(animation_step)
+
+
+
+  # if _fnum > previous fnum, apply forward, otherwise reverse
 
 
 func handle_jump():
