@@ -4,7 +4,8 @@
 [ext_resource type="Script" uid="uid://7g08lu4vmbl4" path="res://Scenes/Interactables/collectable.gd" id="2_mljyq"]
 [ext_resource type="Texture2D" uid="uid://cocu7uq8a0731" path="res://Assets/Items/cassette_win.png" id="3_nojdq"]
 
-[node name="Collectable" groups=["collectable"] instance=ExtResource("1_lnge0")]
+[node name="Collectable" groups=["collectable", "player"] instance=ExtResource("1_lnge0")]
+collision_layer = 3
 monitoring = false
 monitorable = false
 script = ExtResource("2_mljyq")

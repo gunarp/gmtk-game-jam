@@ -136,6 +136,8 @@ func handle_jump():
     jumping = true
     if coyote:
       coyote = false
+    if $JumpSFX.stream:
+      $JumpSFX.play()
 
 
 func handle_dash():

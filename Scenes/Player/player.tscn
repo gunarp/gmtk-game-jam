@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dk6a56e3n3mbc"]
+[gd_scene load_steps=24 format=3 uid="uid://dk6a56e3n3mbc"]
 
 [ext_resource type="PackedScene" uid="uid://cupi7qpibwqb1" path="res://Scenes/Virtual/actor.tscn" id="1_xtkr7"]
 [ext_resource type="Script" uid="uid://5igxx24o7jgk" path="res://Scenes/Player/player.gd" id="2_5gwpl"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://curlrogm0ctde" path="res://Assets/Player/walk_right_7.png" id="11_rukb4"]
 [ext_resource type="Texture2D" uid="uid://ldwi4qi3y8vl" path="res://Assets/Player/walk_right_8.png" id="12_4no11"]
 [ext_resource type="Texture2D" uid="uid://dmh6thvaoqqmu" path="res://Assets/Player/sparkles_sprite_sheet.png" id="13_06tpx"]
+[ext_resource type="AudioStream" uid="uid://ud8deined2yn" path="res://Assets/Audio/SFX/jump.mp3" id="17_ks1b7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbkd8"]
 size = Vector2(38, 73)
@@ -147,6 +148,7 @@ shape = SubResource("RectangleShape2D_xvbrh")
 [node name="FootstepsSFX" type="AudioStreamPlayer2D" parent="." index="4"]
 
 [node name="JumpSFX" type="AudioStreamPlayer2D" parent="." index="5"]
+stream = ExtResource("17_ks1b7")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="6"]
 emitting = false
