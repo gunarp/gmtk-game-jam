@@ -55,7 +55,7 @@ const Wall_JumpBuffer: float = .1;
 
 const Dash_Strength: float = 2.5;
 const Dash_input_cooldown: float = .1;
-const Dash_up_scale: float = .75;
+const Dash_up_scale: float = .6;
 const Dash_down_scale: float = 1;
 const Dash_right_scale: float = 1.2;
 const Dash_left_scale: float = 1.2;

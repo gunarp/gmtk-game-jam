@@ -19,8 +19,6 @@ var num_frames: int = 0
 var max_scroll: int = 0
 var min_scroll: int = 0
 
-var has_been_set: bool = false
-
 class EmptyMargin extends MarginContainer:
   func _init() -> void:
     # TODO: replace magic number
@@ -39,7 +37,7 @@ func set_scroll_at_end():
   # TODO: make this scroll to the center of the last object in the list
   targetScroll = max_scroll
   show()
-  await _tween_scroll(max_scroll)
+  await _tween_scroll(targetScroll)
   _select_deselect_highlight()
 
 
@@ -48,17 +46,13 @@ func _on_visibility_changed():
     ignore_input = true
 
 
-func generate_frames_for_contianer(timeline: Array[Dictionary], current_timeline_pos: int, max_frames: int) -> void:
+func generate_frames_for_container(timeline: Array[Dictionary], current_timeline_pos: int, max_frames: int) -> void:
   if frame_container != null:
     for child in frame_container.get_children():
       if child != null:
         child.queue_free()
 
   frame_container.add_child(EmptyMargin.new())
-
-  # Set children of frame_container to be selectable frames... for now just use a placeholder asset
-  var new_child = TextureRect.new()
-  new_child.texture = load("res://Assets/UI/hud_heartFull.png")
 
   # naieve approach - add all frames
   # the end of the array is current_timeline_pos and loops around
@@ -69,30 +63,27 @@ func generate_frames_for_contianer(timeline: Array[Dictionary], current_timeline
 
   # foolishly load in the array in reverse order
   for i in range(current_timeline_pos + 1, max_frames):
-    if timeline[i] == null:
+    if timeline[i].is_empty():
       break
 
-    frame_container.add_child(new_child.duplicate())
+    var display_number = -1 * (current_timeline_pos + (max_frames - i))
+    var new_child = TimelineMenuItem.create_item(display_number, i)
+    frame_container.add_child(new_child)
     num_frames += 1
 
   for i in range(0, current_timeline_pos + 1):
-    frame_container.add_child(new_child.duplicate())
+    frame_container.add_child(TimelineMenuItem.create_item(i - current_timeline_pos, i))
     num_frames += 1
 
-  # for i in range(6):
-  #   var copy = new_child.duplicate()
-  #   frame_container.add_child(copy)
-  #   num_frames += 1
-
   frame_container.add_child(EmptyMargin.new())
-
   max_scroll = (_get_space_between() * (num_frames - 1))
+
 
 func display_frames_on_pause(timeline: Array[Dictionary], current_timeline_pos: int, num_timelines_looped: int, max_frames: int) -> void:
   print("stopped on frame: ", num_timelines_looped * max_frames + current_timeline_pos)
   print(timeline[current_timeline_pos])
 
-  generate_frames_for_contianer(timeline, current_timeline_pos, max_frames)
+  generate_frames_for_container(timeline, current_timeline_pos, max_frames)
   set_scroll_at_end()
 
 
@@ -104,14 +95,17 @@ func _process(_delta: float) -> void:
     return
 
   if Input.is_action_just_pressed("freeze"):
-    print("current scroll value: ", scroll_container.scroll_horizontal)
-    var dest_frame = 10
-    unfreeze.emit(dest_frame)
+    # print("current scroll value: ", scroll_container.scroll_horizontal)
+    # var dest_frame = 10
+    var selection = get_selected_value()
+    if selection is TimelineMenuItem:
+      var s = selection as TimelineMenuItem
+      unfreeze.emit(s.frame_number_real)
 
-  if Input.is_action_just_pressed("scrub_back"):
+  if Input.is_action_pressed("scrub_back"):
     _on_previous_button_pressed()
 
-  if Input.is_action_just_pressed("scrub_forward"):
+  if Input.is_action_pressed("scrub_forward"):
     _on_next_button_pressed()
 
 
@@ -158,15 +152,15 @@ func _select_deselect_highlight():
   var selectedNode = get_selected_value()
 
   for object in frame_container.get_children():
-    if object is not TextureRect:
+    if object is not TimelineMenuItem:
       continue
 
-    var tex = object as TextureRect
+    var item = object as TimelineMenuItem
 
     if object == selectedNode:
-      tex.material = outline_mat
+      item.apply_material(outline_mat)
     else:
-      tex.material = null
+      item.apply_material(null)
 
 
 func get_selected_value():
@@ -174,5 +168,4 @@ func get_selected_value():
 
   for object in frame_container.get_children():
     if object.get_global_rect().has_point(selectedPosition):
-      print("    selected_node: ", object.name)
       return object

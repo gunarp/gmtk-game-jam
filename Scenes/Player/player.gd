@@ -148,9 +148,7 @@ func handle_dash():
     is_dash_active = true
     can_dash = false
     # asynchronously wait on timer to complete
-    print("dash_start")
     await get_tree().create_timer(Constants.Dash_Strength * Constants.Dash_input_cooldown).timeout
-    print("dash_end")
     is_dash_active = false
 
 

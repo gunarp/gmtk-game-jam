@@ -19,7 +19,9 @@ var current_checkpoint: Checkpoint
 var timeline: Array[Dictionary]
 var num_timelines_looped: int = 0
 var current_timeline_pos: int = 0
-const MAX_TIMELIINE_LENGTH: int = 600
+var skipped_frames: int = 0
+const NUM_SKIP_FRAMES: int = 3
+const MAX_TIMELIINE_LENGTH: int = 300
 
 var is_paused: bool = false
 
@@ -49,16 +51,18 @@ func _process(delta):
   # Save all freezable game object states in timeline
   # TODO: determine if every frame is actually necessary to save
 
-  for child in get_children():
-    if child.has_method("get_state"):
-      timeline[current_timeline_pos][child.get_instance_id()] = FrozenState.new(child.get_state())
-      # print("state stored, id:", child.get_instance_id(), " state: ", timeline[current_timeline_pos][child.get_instance_id()])
+  if (skipped_frames == NUM_SKIP_FRAMES):
+    for child in get_children():
+      if child.has_method("get_state"):
+        timeline[current_timeline_pos][child.get_instance_id()] = FrozenState.new(child.get_state())
+        # print("state stored, id:", child.get_instance_id(), " state: ", timeline[current_timeline_pos][child.get_instance_id()])
 
-
-  current_timeline_pos = current_timeline_pos + 1
-  if current_timeline_pos == MAX_TIMELIINE_LENGTH:
-    current_timeline_pos = 0
-    num_timelines_looped += 1
+    current_timeline_pos = current_timeline_pos + 1
+    if current_timeline_pos == MAX_TIMELIINE_LENGTH:
+      current_timeline_pos = 0
+      num_timelines_looped += 1
+  else:
+    skipped_frames += 1
 
 
 func after_ready():
