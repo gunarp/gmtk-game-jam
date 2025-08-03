@@ -129,4 +129,7 @@ collision_mask = 6
 position = Vector2(0, 45)
 shape = SubResource("RectangleShape2D_xvbrh")
 
+[node name="FreezeDash" type="Timer" parent="." index="4"]
+one_shot = true
+
 [connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

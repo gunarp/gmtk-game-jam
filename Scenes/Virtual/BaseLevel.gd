@@ -40,6 +40,8 @@ func _ready():
 
   # $Player.set_up_camera_limit(boundry_rect)
   $TimelineMenu.connect("unfreeze", on_unfreeze)
+  $TimelineMenu.connect("project_vector", on_project_vector)
+
   after_ready.call_deferred()
 
 
@@ -79,6 +81,7 @@ func _toggle_pause_subtree():
   if is_paused:
     $TimelineMenu.display_frames_on_pause(timeline, current_timeline_pos, num_timelines_looped, MAX_TIMELIINE_LENGTH)
   else:
+    $Line2D.clear_points()
     $TimelineMenu.hide()
   get_tree().paused = is_paused
 
@@ -89,23 +92,28 @@ func handle_freeze():
       _toggle_pause_subtree()
 
 
-func on_unfreeze(unfreeze_frame, toggle_pause):
+func on_project_vector(proj: Vector2):
+  # draw vector starting at player position
+  $Line2D.clear_points()
+  $Line2D.add_point($Player.global_position)
+  $Line2D.add_point($Player.global_position + proj / 5)
+  # $Line2D.global_rotation = 0
+
+
+func on_unfreeze(unfreeze_frame, unfreeze_input, toggle_pause):
   if toggle_pause:
     _toggle_pause_subtree()
-  # TODO: extract to another function
-  # once frame selected, load from timeline and discard
-  # future states
-  unfreeze_at_frame(unfreeze_frame)
+  unfreeze_at_frame(unfreeze_frame, unfreeze_input)
 
 
-func unfreeze_at_frame(dest_frame: int = maxi(0, current_timeline_pos - 60)):
+func unfreeze_at_frame(dest_frame: int, unfreeze_input):
   for child in get_children():
     if child.has_method("load_state"):
       # print("dest_frame: ", num_timelines_looped * MAX_TIMELIINE_LENGTH + dest_frame)
       var state: FrozenState = timeline[dest_frame][child.get_instance_id()]
       current_timeline_pos = dest_frame
       # print("loadingstate: ", state.frozenState)
-      child.load_state(current_timeline_pos + (num_timelines_looped * MAX_TIMELIINE_LENGTH), state.frozenState)
+      child.load_state(current_timeline_pos + (num_timelines_looped * MAX_TIMELIINE_LENGTH), state.frozenState, unfreeze_input)
 
 
 func on_player_touched(node: Interactable):

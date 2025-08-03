@@ -32,6 +32,7 @@ func _ready():
   super ()
   %CoyoteTimer.wait_time = coyote_time_frames / 60.
   %JumpBufferTimer.wait_time = jump_time_frames / 60.
+  $FreezeDash.timeout.connect(freeze_dash_completed)
 
 
 func handle_animation(_delta):
@@ -43,11 +44,6 @@ func handle_animation(_delta):
     $AnimatedSprite2D.flip_h = true
   else:
     $AnimatedSprite2D.play("default")
-  # else:
-  #   if velocity.y < 0:
-  #     $AnimatedSprite2D.play("jump")
-  #   else:
-  #     $AnimatedSprite2D.play("fall")
 
 
 func handle_gravity(delta):
@@ -59,11 +55,9 @@ func handle_gravity(delta):
 
 
 func handle_physics(delta):
-  # TODO: think about a way to funnel inputs into here outside of a regular loop
   if is_on_floor():
     can_dash = true
     jumping = false
-  # Handle Jump.
 
   if not is_dash_active:
     handle_jump()
@@ -75,9 +69,6 @@ func handle_physics(delta):
       else:
         calculated_velocity.x = lerp(calculated_velocity.x, 0.0, friction)
 
-  # Do all calculations on the tracked calculated_velocity
-
-  # Get the input direction and handle the movement/deceleration.
 
   velocity = calculated_velocity
   move_and_slide()
@@ -102,13 +93,23 @@ func advance_animation(step: int):
   $AnimatedSprite2D.frame = next_frame
 
 
-func load_state(_fnum: int, _state: PackedFloat32Array):
-  calculated_velocity.x = _state[2]
-  calculated_velocity.y = _state[3]
-  super (_fnum, _state)
-  # probably want a custom animation handler here
+func freeze_dash_completed():
+  is_dash_active = false
 
-  # if x velocity is nonzero, apply a walk cycle change
+
+func load_state(_fnum: int, _state: PackedFloat32Array, _unfreeze_input: Vector2):
+  if _unfreeze_input != Vector2.ZERO:
+    print("unfreeze velocity: ", _unfreeze_input)
+    calculated_velocity = _unfreeze_input
+    # move_cooldown = Vector2(0.5, 1) * Constants.Dash_input_cooldown
+    is_dash_active = true
+    $FreezeDash.wait_time = Constants.Dash_Strength * Constants.Dash_input_cooldown
+  else:
+    calculated_velocity.x = _state[2]
+    calculated_velocity.y = _state[3]
+
+  super (_fnum, _state, _unfreeze_input)
+
   var animation_step = 1 if _fnum > last_loaded_frame else -1
 
   if calculated_velocity.x > 5:
@@ -122,9 +123,8 @@ func load_state(_fnum: int, _state: PackedFloat32Array):
 
   advance_animation(animation_step)
 
-
-
-  # if _fnum > previous fnum, apply forward, otherwise reverse
+  if _unfreeze_input != Vector2.ZERO:
+    $FreezeDash.start()
 
 
 func handle_jump():
@@ -156,24 +156,8 @@ func handle_dash():
 
     var default_dash_direction = Vector2(1, 0) if not $AnimatedSprite2D.flip_h else Vector2(-1, 0)
     var dash_direction = default_dash_direction if input_vect == Vector2.ZERO else input_vect
-    # print("dash requested, direction: ", dash_direction)
-    # var dash_dir = vector2()
-
-    var dash_multiplier = Vector2.ONE
-
-    if dash_direction.x > 0:
-      dash_multiplier.x = Constants.Dash_right_scale;
-    elif dash_direction.x < 0:
-      dash_multiplier.x = Constants.Dash_left_scale;
-
-    if dash_direction.y < 0:
-      dash_multiplier.y = Constants.Dash_up_scale;
-    elif dash_direction.y > 0:
-      dash_multiplier.y = Constants.Dash_down_scale;
-
-    # print("dashing in direction of: ", dash_direction)
-    calculated_velocity = dash_direction * Constants.Dash_Strength * dash_multiplier * 60
-    # print("dashed, old velocity: ", velocity, " dash velocity:", calculated_velocity)
+    calculated_velocity = Constants.calculate_dash_from_input(dash_direction)
+    print("dash_velocity", calculated_velocity)
 
     move_cooldown = Vector2(0.5, 1) * Constants.Dash_input_cooldown
     is_dash_active = true

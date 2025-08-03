@@ -9,6 +9,7 @@ extends Control
 @onready var outline_mat: ShaderMaterial = ShaderMaterial.new()
 
 signal unfreeze
+signal project_vector
 
 var ignore_input = false
 var targetScroll = 0
@@ -110,6 +111,19 @@ func _process(_delta: float) -> void:
 
   # read movement inputs to project movement vector on screen
 
+  var input_vect = Vector2(
+    Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
+    Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
+  )
+
+  if Input.is_action_pressed("dash"):
+    input_vect = Constants.calculate_dash_from_input(input_vect)
+  else:
+    input_vect *= 0
+
+  project_vector.emit(input_vect)
+
+
   if Input.is_action_just_pressed("freeze"):
     # print("current scroll value: ", scroll_container.scroll_horizontal)
     # var dest_frame = 10
@@ -117,7 +131,7 @@ func _process(_delta: float) -> void:
     if selection is TimelineMenuItem:
       var s = selection as TimelineMenuItem
       # true = unfreeze after displaying frame
-      unfreeze.emit(s.frame_number_real, true)
+      unfreeze.emit(s.frame_number_real, input_vect, true)
 
   if can_scrub:
     if Input.is_action_just_pressed("scrub_back"):
@@ -146,7 +160,7 @@ func _refresh_preview():
   var selection = get_selected_value()
   if selection is TimelineMenuItem:
     var s = selection as TimelineMenuItem
-    unfreeze.emit(s.frame_number_real, false)
+    unfreeze.emit(s.frame_number_real, Vector2.ZERO, false)
 
 
 func _set_selection():
