@@ -105,6 +105,7 @@ func advance_animation(step: int):
 
 func freeze_dash_completed():
   is_dash_active = false
+  $GPUParticles2D.emitting = false
 
 
 func load_state(_fnum: int, _state: PackedFloat32Array, _unfreeze_input: Vector2):
@@ -114,6 +115,7 @@ func load_state(_fnum: int, _state: PackedFloat32Array, _unfreeze_input: Vector2
     # move_cooldown = Vector2(0.5, 1) * Constants.Dash_input_cooldown
     is_dash_active = true
     $FreezeDash.wait_time = Constants.Dash_Strength * Constants.Dash_input_cooldown
+    $GPUParticles2D.emitting = true
   else:
     calculated_velocity.x = _state[2]
     calculated_velocity.y = _state[3]
