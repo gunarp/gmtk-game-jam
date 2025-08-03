@@ -72,10 +72,10 @@ func handle_physics(delta):
   if not is_dash_active:
     handle_jump()
     handle_dash()
-    var direction = Input.get_axis("move_left", "move_right")
+    var _direction = Input.get_axis("move_left", "move_right")
     if move_cooldown.x <= 0:
-      if direction:
-        calculated_velocity.x = lerp(calculated_velocity.x, direction * speed, acceleration)
+      if _direction:
+        calculated_velocity.x = lerp(calculated_velocity.x, _direction * speed, acceleration)
       else:
         calculated_velocity.x = lerp(calculated_velocity.x, 0.0, friction)
 
