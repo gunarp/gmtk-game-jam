@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://lgon31cuvlho"]
 
-[ext_resource type="Script" uid="uid://b8pjpxtd7b3ji" path="res://Scenes/UI/PArts/level_selector.gd" id="1_wl2wh"]
+[ext_resource type="Script" uid="uid://b8pjpxtd7b3ji" path="res://Scenes/UI/Parts/level_selector.gd" id="1_wl2wh"]
 [ext_resource type="Texture2D" uid="uid://dtk70j47as81m" path="res://Assets/UI/platformer_lvlselect_icons.png" id="2_jxnni"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ljtxs"]

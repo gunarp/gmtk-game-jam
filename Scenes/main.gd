@@ -24,7 +24,7 @@ func change_to_level(new_level: LevelResource, level_index: int):
 
   # queue up logic for next level
 
-  if level_index + 1 > levels.level_array.size():
+  if level_index >= levels.level_array.size():
     change_to_level_selection()
     return
 
@@ -33,8 +33,15 @@ func change_to_level(new_level: LevelResource, level_index: int):
 
   change_scene($LevelHolder, level_to_load)
 
+  print("changed to level: ", level_index)
+
   levels.next_level_index = level_index + 1
-  var nlCallable = change_to_level.bind(levels.level_array[level_index], levels.next_level_index)
+  var nlCallable
+
+  if levels.next_level_index < levels.level_array.size():
+    nlCallable = change_to_level.bind(levels.level_array[levels.next_level_index], levels.next_level_index)
+  else:
+    nlCallable = change_to_level.bind(null, levels.next_level_index)
   level_to_load.level_ended.connect(nlCallable)
 
 

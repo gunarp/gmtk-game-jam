@@ -146,7 +146,6 @@ func reset_score():
 
 
 func exit_level():
-  print("ended")
   level_ended.emit()
 
 
