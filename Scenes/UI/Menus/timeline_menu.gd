@@ -19,15 +19,23 @@ var num_frames: int = 0
 var max_scroll: int = 0
 var min_scroll: int = 0
 
+const scrub_debounce_time: float = 0.5
+var scrub_debounce_timer: Timer = Timer.new()
+var can_scrub: bool = true
+
 class EmptyMargin extends MarginContainer:
   func _init() -> void:
-    # TODO: replace magic number
     add_theme_constant_override("margin_right", padding)
 
 
 func _ready() -> void:
   outline_mat.shader = preload("res://Resources/2d_outline.gdshader")
   visibility_changed.connect(_on_visibility_changed)
+
+  scrub_debounce_timer.wait_time = scrub_debounce_time
+  scrub_debounce_timer.one_shot = true
+  scrub_debounce_timer.timeout.connect(_scrub_debounce_cb)
+  add_child(scrub_debounce_timer)
 
   # move scroll position to end, after ScrollContainer is ready
   # set_scroll_at_end.call_deferred()
@@ -80,11 +88,15 @@ func generate_frames_for_container(timeline: Array[Dictionary], current_timeline
 
 
 func display_frames_on_pause(timeline: Array[Dictionary], current_timeline_pos: int, num_timelines_looped: int, max_frames: int) -> void:
-  print("stopped on frame: ", num_timelines_looped * max_frames + current_timeline_pos)
-  print(timeline[current_timeline_pos])
+  # print("stopped on frame: ", num_timelines_looped * max_frames + current_timeline_pos)
+  # print(timeline[current_timeline_pos])
 
   generate_frames_for_container(timeline, current_timeline_pos, max_frames)
   set_scroll_at_end()
+
+
+func _scrub_debounce_cb():
+  can_scrub = true
 
 
 func _process(_delta: float) -> void:
@@ -103,20 +115,35 @@ func _process(_delta: float) -> void:
       # true = unfreeze after displaying frame
       unfreeze.emit(s.frame_number_real, true)
 
-  if Input.is_action_pressed("scrub_back"):
-    _on_previous_button_pressed()
-    var selection = get_selected_value()
-    if selection is TimelineMenuItem:
-      var s = selection as TimelineMenuItem
-      # false = only display frame, do NOT unfreeze
-      unfreeze.emit(s.frame_number_real, false)
+  if can_scrub:
+    if Input.is_action_just_pressed("scrub_back"):
+      _on_previous_button_pressed()
+      _refresh_preview()
+      can_scrub = false
+      scrub_debounce_timer.start()
+    elif Input.is_action_just_pressed("scrub_forward"):
+      _on_next_button_pressed()
+      _refresh_preview()
+      can_scrub = false
+      scrub_debounce_timer.start()
+    elif Input.is_action_pressed("scrub_back"):
+      _on_previous_button_pressed()
+      _refresh_preview()
+    elif Input.is_action_pressed("scrub_forward"):
+      _on_next_button_pressed()
+      _refresh_preview()
+  else:
+    if not Input.is_action_pressed("scrub_back") and not Input.is_action_pressed("scrub_forward"):
+      scrub_debounce_timer.stop()
+      can_scrub = true
 
-  if Input.is_action_pressed("scrub_forward"):
-    _on_next_button_pressed()
-    var selection = get_selected_value()
-    if selection is TimelineMenuItem:
-      var s = selection as TimelineMenuItem
-      unfreeze.emit(s.frame_number_real, false)
+
+
+func _refresh_preview():
+  var selection = get_selected_value()
+  if selection is TimelineMenuItem:
+    var s = selection as TimelineMenuItem
+    unfreeze.emit(s.frame_number_real, false)
 
 
 func _set_selection():
