@@ -20,12 +20,18 @@ func change_scene(new_parent: Node, new_child: Node):
   new_parent.add_child(new_child)
   current_scene = new_child
 
+
+func change_to_credits():
+  get_tree().change_scene_to_file("res://Scenes/UI/Menus/credits.tscn")
+
+
 func change_to_level(new_level: LevelResource, level_index: int):
 
   # queue up logic for next level
 
   if level_index >= levels.level_array.size():
-    change_to_level_selection()
+    # change_to_level_selection()
+    change_to_credits()
     return
 
   var level_scene: PackedScene = new_level.level_scene

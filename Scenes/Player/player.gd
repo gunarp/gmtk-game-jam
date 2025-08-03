@@ -118,6 +118,7 @@ func load_state(_fnum: int, _state: PackedFloat32Array, _unfreeze_input: Vector2
     is_dash_active = true
     $FreezeDash.wait_time = Constants.Dash_Strength * Constants.Dash_input_cooldown
     $GPUParticles2D.emitting = true
+    $DashSFX.play()
   else:
     calculated_velocity.x = _state[2]
     calculated_velocity.y = _state[3]
@@ -186,7 +187,7 @@ func handle_dash():
       return
     # Play dash sound
     $DashSFX.play()
-    
+
     var input_vect = Vector2(
       Input.get_action_strength("move_right") - Input.get_action_strength("move_left"),
       Input.get_action_strength("move_down") - Input.get_action_strength("move_up")

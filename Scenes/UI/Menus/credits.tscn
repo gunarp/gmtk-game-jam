@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dh33ykcer0g7f"]
+[gd_scene load_steps=3 format=3 uid="uid://5nx4v6vydan3"]
 
 [ext_resource type="FontFile" uid="uid://dnrb5w6eq6dkl" path="res://Assets/UI/VCR_OSD_MONO_1.001.ttf" id="1_2sgw1"]
 [ext_resource type="Script" uid="uid://obeouosyknfp" path="res://Scenes/UI/Menus/credits.gd" id="1_xqn1s"]
@@ -42,6 +42,28 @@ Thanks for playing!"
 scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_2sgw1")
+text = "RETRO RE:LOOP
+
+Programmers
+Peter Gunarso, Sunny Hu
+
+Level Design, Art, & Audio
+Addison Co
+
+Thanks for playing!"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Fade" type="ColorRect" parent="."]
 z_index = 1

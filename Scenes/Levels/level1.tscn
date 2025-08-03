@@ -31,21 +31,3 @@ position = Vector2(13, 135)
 
 [node name="DeathLayer" parent="." index="7"]
 tile_map_data = PackedByteArray("AAAWABUAAQAAAAAAAQAXABUAAQAAAAAAAQAYABUAAQAAAAAAAQAZABUAAQAAAAAAAQAaABUAAQAAAAAAAQAbABUAAQAAAAAAAQAcABUAAQAAAAAAAQAdABUAAQAAAAAAAQAeABUAAQAAAAAAAQAVABUAAQAAAAAAAQAUABUAAQAAAAAAAQATABUAAQAAAAAAAQASABUAAQAAAAAAAQARABUAAQAAAAAAAQAQABUAAQAAAAAAAQAPABUAAQAAAAAAAQAOABUAAQAAAAAAAQA=")
-
-[connection signal="body_entered" from="DeathLayer/DeathZone" to="DeathLayer/DeathZone" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22116" to="DeathLayer/@Area2D@22116" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22117" to="DeathLayer/@Area2D@22117" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22118" to="DeathLayer/@Area2D@22118" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22119" to="DeathLayer/@Area2D@22119" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22120" to="DeathLayer/@Area2D@22120" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22121" to="DeathLayer/@Area2D@22121" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22122" to="DeathLayer/@Area2D@22122" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22123" to="DeathLayer/@Area2D@22123" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22124" to="DeathLayer/@Area2D@22124" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22125" to="DeathLayer/@Area2D@22125" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22126" to="DeathLayer/@Area2D@22126" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22127" to="DeathLayer/@Area2D@22127" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22128" to="DeathLayer/@Area2D@22128" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22129" to="DeathLayer/@Area2D@22129" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22130" to="DeathLayer/@Area2D@22130" method="_on_body_entered"]
-[connection signal="body_entered" from="DeathLayer/@Area2D@22131" to="DeathLayer/@Area2D@22131" method="_on_body_entered"]
