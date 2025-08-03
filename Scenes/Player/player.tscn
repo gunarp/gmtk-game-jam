@@ -1,11 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://dk6a56e3n3mbc"]
+[gd_scene load_steps=23 format=3 uid="uid://dk6a56e3n3mbc"]
 
 [ext_resource type="PackedScene" uid="uid://cupi7qpibwqb1" path="res://Scenes/Virtual/actor.tscn" id="1_xtkr7"]
 [ext_resource type="Script" uid="uid://5igxx24o7jgk" path="res://Scenes/Player/player.gd" id="2_5gwpl"]
+[ext_resource type="AudioStream" uid="uid://cd7vqtgt2myyk" path="res://Assets/Audio/SFX/vinyl_step_1.mp3" id="3_ks1b7"]
 [ext_resource type="Texture2D" uid="uid://cf8k66156ylwv" path="res://Assets/Player/idle_right_1.png" id="3_r5xpd"]
+[ext_resource type="AudioStream" uid="uid://krqx7njduxid" path="res://Assets/Audio/SFX/vinyl_step_2.mp3" id="4_hnuln"]
 [ext_resource type="Texture2D" uid="uid://sxfqxicgxxcq" path="res://Assets/Player/idle_right_2.png" id="4_ks1b7"]
+[ext_resource type="AudioStream" uid="uid://dt3aj5660ebkg" path="res://Assets/Audio/SFX/vinyl_step_3.mp3" id="5_aqm4k"]
 [ext_resource type="Texture2D" uid="uid://bum2d0x3d1akp" path="res://Assets/Player/walk_right_1.png" id="5_rqdc0"]
 [ext_resource type="Texture2D" uid="uid://bgywfdlk0ty1i" path="res://Assets/Player/walk_right_2.png" id="6_qr1w5"]
+[ext_resource type="AudioStream" uid="uid://ct7mbmvun2v6g" path="res://Assets/Audio/SFX/vinyl_step_4.mp3" id="6_rcvs5"]
 [ext_resource type="Texture2D" uid="uid://bvc8x8i2wry2j" path="res://Assets/Player/walk_right_3.png" id="7_ythyg"]
 [ext_resource type="Texture2D" uid="uid://bbauacblqp7r4" path="res://Assets/Player/walk_right_4.png" id="8_bmb2s"]
 [ext_resource type="Texture2D" uid="uid://c5c1igig2kubn" path="res://Assets/Player/walk_right_5.png" id="9_ur3l4"]
@@ -48,7 +52,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_r5xpd")
+"texture": ExtResource("9_ur3l4")
 }],
 "loop": true,
 "name": &"jump",
@@ -103,6 +107,7 @@ collision_mask = 15
 script = ExtResource("2_5gwpl")
 coyote_time_frames = 6
 jump_time_frames = 6
+footsteps = [ExtResource("3_ks1b7"), ExtResource("4_hnuln"), ExtResource("5_aqm4k"), ExtResource("6_rcvs5")]
 friction = 0.428
 acceleration = 0.715
 speed = 120.0
@@ -139,7 +144,11 @@ collision_mask = 6
 position = Vector2(0, 14)
 shape = SubResource("RectangleShape2D_xvbrh")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="4"]
+[node name="FootstepsSFX" type="AudioStreamPlayer2D" parent="." index="4"]
+
+[node name="JumpSFX" type="AudioStreamPlayer2D" parent="." index="5"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="6"]
 emitting = false
 amount = 16
 texture = SubResource("AtlasTexture_7g0yx")

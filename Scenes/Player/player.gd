@@ -3,6 +3,12 @@ class_name Player
 
 @export var coyote_time_frames = 6;
 @export var jump_time_frames = 6;
+@export var footsteps = [
+    preload("res://Assets/Audio/SFX/vinyl_step_1.mp3"),
+    preload("res://Assets/Audio/SFX/vinyl_step_2.mp3"),
+    preload("res://Assets/Audio/SFX/vinyl_step_3.mp3"),
+    preload("res://Assets/Audio/SFX/vinyl_step_4.mp3")
+]
 
 
 #Taken from Kids Can Code - https://kidscancode.org/godot_recipes/4.x/2d/platform_character/index.html
@@ -12,8 +18,12 @@ class_name Player
 
 
 var health = 3
-
+var direction = Input.get_axis("move_left", "move_right")
 var jumping = true
+
+var step_timer := 0.0
+var step_interval := 1.0
+
 
 # Class velocity
 var calculated_velocity: Vector2 = Vector2.ZERO
@@ -89,6 +99,25 @@ func handle_physics(delta):
   move_cooldown.x = move_toward(move_cooldown.x, 0, delta)
   move_cooldown.y = move_toward(move_cooldown.y, 0, delta)
 
+
+func play_footstep():
+  if footsteps.size() > 0 and not $FootstepsSFX.playing:
+    var random_sound = footsteps[randi() % footsteps.size()]
+    $FootstepsSFX.stream = random_sound
+    $FootstepsSFX.pitch_scale = randf_range(0.9, 1.1) # Variation for realism
+    $FootstepsSFX.play()
+
+func _process(delta):
+ direction = Input.get_axis("move_left", "move_right")
+ handle_animation(delta)
+
+ if is_on_floor() and direction != 0:
+  step_timer -= delta
+  if step_timer <= 0:
+    play_footstep()
+    step_timer = step_interval
+  else:
+    step_timer = 0
 
 func load_state(_state: PackedFloat32Array):
   calculated_velocity.x = _state[2]
