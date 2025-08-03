@@ -859,6 +859,10 @@ scenes/2/scene = ExtResource("6_nawf6")
 tile_size = Vector2i(8, 8)
 sources/1 = SubResource("TileSetScenesCollectionSource_5do6m")
 
+[sub_resource type="Curve" id="Curve_5do6m"]
+_data = [Vector2(0.0932642, 1), 0.0, 0.0, 0, 0, Vector2(0.595855, 0.667502), 0.0, 0.0, 0, 0, Vector2(0.896373, 0.400201), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [node name="Level" type="Node2D"]
 script = ExtResource("1_gi0ax")
 
@@ -891,6 +895,10 @@ tile_set = SubResource("TileSet_7a78t")
 [node name="TimelineMenu" parent="." instance=ExtResource("10_5do6m")]
 process_mode = 2
 visible = false
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 3.0
+width_curve = SubResource("Curve_5do6m")
 
 [node name="VHSOverlay" type="TextureRect" parent="."]
 modulate = Color(1, 1, 1, 0.556863)
