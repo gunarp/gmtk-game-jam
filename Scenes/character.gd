@@ -4,6 +4,11 @@ extends Sprite2D
 @export var jump_speed = -1800
 @export var gravity = 4000
 
+#func play_footstep():
+    #var random_sound = footsteps[randi() % footsteps.size()]
+    #$FootstepsSFX.stream = random_sound
+    #$FootstepsSFX.play()
+
 func _ready():
   $PlayerAnimation.play("idle_right")
 

@@ -3,6 +3,12 @@ class_name Player
 
 @export var coyote_time_frames = 6;
 @export var jump_time_frames = 6;
+@export var footsteps = [
+    preload("res://Assets/Audio/SFX/vinyl_step_1.mp3"),
+    preload("res://Assets/Audio/SFX/vinyl_step_2.mp3"),
+    preload("res://Assets/Audio/SFX/vinyl_step_3.mp3"),
+    preload("res://Assets/Audio/SFX/vinyl_step_4.mp3")
+]
 
 
 #Taken from Kids Can Code - https://kidscancode.org/godot_recipes/4.x/2d/platform_character/index.html
@@ -12,8 +18,12 @@ class_name Player
 
 
 var health = 3
-
+var direction = Input.get_axis("move_left", "move_right")
 var jumping = true
+
+var step_timer := 0.0
+var step_interval := 1.0
+
 
 # Class velocity
 var calculated_velocity: Vector2 = Vector2.ZERO
@@ -126,6 +136,26 @@ func load_state(_fnum: int, _state: PackedFloat32Array, _unfreeze_input: Vector2
   if _unfreeze_input != Vector2.ZERO:
     $FreezeDash.start()
 
+func play_footstep():
+  if footsteps.size() > 0 and not $FootstepsSFX.playing:
+    var random_sound = footsteps[randi() % footsteps.size()]
+    $FootstepsSFX.stream = random_sound
+    $FootstepsSFX.pitch_scale = randf_range(0.9, 1.1) # Variation for realism
+    $FootstepsSFX.play()
+
+
+func _process(delta):
+ direction = Input.get_axis("move_left", "move_right")
+ handle_animation(delta)
+
+ if is_on_floor() and direction != 0:
+  step_timer -= delta
+  if step_timer <= 0:
+    play_footstep()
+    step_timer = step_interval
+  else:
+    step_timer = 0
+
 
 func handle_jump():
   if Input.is_action_just_pressed("jump"):
@@ -138,6 +168,8 @@ func handle_jump():
     jumping = true
     if coyote:
       coyote = false
+    if $JumpSFX.stream:
+      $JumpSFX.play()
 
 
 func handle_dash():
@@ -146,7 +178,7 @@ func handle_dash():
       print("couldn't dash")
       return
     if is_dash_active:
-      print("alreayd dashing")
+      print("already dashing")
       return
 
     var input_vect = Vector2(
@@ -162,9 +194,11 @@ func handle_dash():
     move_cooldown = Vector2(0.5, 1) * Constants.Dash_input_cooldown
     is_dash_active = true
     can_dash = false
+    $GPUParticles2D.emitting = true
     # asynchronously wait on timer to complete
     await get_tree().create_timer(Constants.Dash_Strength * Constants.Dash_input_cooldown).timeout
     is_dash_active = false
+    $GPUParticles2D.emitting = false
 
 
 func handle_cols():

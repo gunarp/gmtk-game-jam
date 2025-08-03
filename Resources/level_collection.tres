@@ -1,29 +1,71 @@
-[gd_resource type="Resource" script_class="LevelCollectionResource" load_steps=9 format=3 uid="uid://cp8wrxwjud0b1"]
+[gd_resource type="Resource" script_class="LevelCollectionResource" load_steps=21 format=3 uid="uid://cp8wrxwjud0b1"]
 
 [ext_resource type="Script" uid="uid://cs6fg6y2qqyvj" path="res://Resources/Scripts/level_collection.gd" id="1_hkkd7"]
 [ext_resource type="Script" uid="uid://c356ujgh4qrfv" path="res://Resources/Scripts/level_resource.gd" id="2_c5tna"]
 [ext_resource type="PackedScene" uid="uid://di30mv4npivm6" path="res://Scenes/Levels/level1.tscn" id="3_cbg87"]
-[ext_resource type="PackedScene" uid="uid://calmux6wahgo7" path="res://Scenes/Levels/test_level_tiles.tscn" id="4_cbg87"]
+[ext_resource type="PackedScene" uid="uid://dufbe4jkimlm5" path="res://Scenes/Levels/level3.tscn" id="4_l5nrp"]
 [ext_resource type="PackedScene" uid="uid://dxm0isvn5gx1f" path="res://Scenes/Levels/level2.tscn" id="4_x57wc"]
+[ext_resource type="PackedScene" uid="uid://285dcxv4ritm" path="res://Scenes/Levels/level4.tscn" id="5_ng006"]
+[ext_resource type="PackedScene" uid="uid://b4desvkbtidq6" path="res://Scenes/Levels/level5.tscn" id="6_modjr"]
+[ext_resource type="PackedScene" uid="uid://bpj6s1s4b264v" path="res://Scenes/Levels/level6.tscn" id="7_s2y07"]
+[ext_resource type="PackedScene" uid="uid://dpauatcsghxej" path="res://Scenes/Levels/level7.tscn" id="8_70gv4"]
+[ext_resource type="PackedScene" uid="uid://2bgxjts46on1" path="res://Scenes/Levels/level8.tscn" id="9_dqq1t"]
+[ext_resource type="PackedScene" uid="uid://cmnrol6qrarak" path="res://Scenes/Levels/level9.tscn" id="10_4hb56"]
 
 [sub_resource type="Resource" id="Resource_x57wc"]
 script = ExtResource("2_c5tna")
 level_name = "Level 1"
-level_scene = ExtResource("4_cbg87")
+level_scene = ExtResource("3_cbg87")
 metadata/_custom_type_script = "uid://c356ujgh4qrfv"
 
 [sub_resource type="Resource" id="Resource_u4yq5"]
 script = ExtResource("2_c5tna")
 level_name = "Level 2"
-level_scene = ExtResource("3_cbg87")
+level_scene = ExtResource("4_x57wc")
 metadata/_custom_type_script = "uid://c356ujgh4qrfv"
 
 [sub_resource type="Resource" id="Resource_fyoy1"]
 script = ExtResource("2_c5tna")
 level_name = "Level 3"
-level_scene = ExtResource("4_x57wc")
+level_scene = ExtResource("4_l5nrp")
+metadata/_custom_type_script = "uid://c356ujgh4qrfv"
+
+[sub_resource type="Resource" id="Resource_cbg87"]
+script = ExtResource("2_c5tna")
+level_name = "Level 4"
+level_scene = ExtResource("5_ng006")
+metadata/_custom_type_script = "uid://c356ujgh4qrfv"
+
+[sub_resource type="Resource" id="Resource_tnvb5"]
+script = ExtResource("2_c5tna")
+level_name = "Level 5"
+level_scene = ExtResource("6_modjr")
+metadata/_custom_type_script = "uid://c356ujgh4qrfv"
+
+[sub_resource type="Resource" id="Resource_jwrcv"]
+script = ExtResource("2_c5tna")
+level_name = "Level 6"
+level_scene = ExtResource("7_s2y07")
+metadata/_custom_type_script = "uid://c356ujgh4qrfv"
+
+[sub_resource type="Resource" id="Resource_p44mb"]
+script = ExtResource("2_c5tna")
+level_name = "Level 7"
+level_scene = ExtResource("8_70gv4")
+metadata/_custom_type_script = "uid://c356ujgh4qrfv"
+
+[sub_resource type="Resource" id="Resource_hdy5g"]
+script = ExtResource("2_c5tna")
+level_name = "Level 8"
+level_scene = ExtResource("9_dqq1t")
+metadata/_custom_type_script = "uid://c356ujgh4qrfv"
+
+[sub_resource type="Resource" id="Resource_l5nrp"]
+script = ExtResource("2_c5tna")
+level_name = "Level 9"
+level_scene = ExtResource("10_4hb56")
 metadata/_custom_type_script = "uid://c356ujgh4qrfv"
 
 [resource]
 script = ExtResource("1_hkkd7")
-level_array = Array[ExtResource("2_c5tna")]([SubResource("Resource_x57wc"), SubResource("Resource_u4yq5"), SubResource("Resource_fyoy1")])
+level_array = Array[ExtResource("2_c5tna")]([SubResource("Resource_x57wc"), SubResource("Resource_u4yq5"), SubResource("Resource_fyoy1"), SubResource("Resource_cbg87"), SubResource("Resource_tnvb5"), SubResource("Resource_jwrcv"), SubResource("Resource_p44mb"), SubResource("Resource_hdy5g"), SubResource("Resource_l5nrp")])

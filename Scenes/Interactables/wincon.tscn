@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cx1jiuxax5257"]
+
+[ext_resource type="Script" uid="uid://5ebi3ufuskyr" path="res://Scenes/Interactables/wincon.gd" id="1_uxg4f"]
+[ext_resource type="Texture2D" uid="uid://cocu7uq8a0731" path="res://Assets/Items/cassette_win.png" id="1_whjlr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxg4f"]
+size = Vector2(42, 26)
+
+[node name="Wincon" type="Area2D"]
+collision_mask = 3
+script = ExtResource("1_uxg4f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_whjlr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.4, 0.4)
+shape = SubResource("RectangleShape2D_uxg4f")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
