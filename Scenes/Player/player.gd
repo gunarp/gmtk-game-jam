@@ -115,7 +115,7 @@ func handle_dash():
       print("couldn't dash")
       return
     if is_dash_active:
-      print("alreayd dashing")
+      print("already dashing")
       return
 
     var input_vect = Vector2(
@@ -147,11 +147,13 @@ func handle_dash():
     move_cooldown = Vector2(0.5, 1) * Constants.Dash_input_cooldown
     is_dash_active = true
     can_dash = false
+    $GPUParticles2D.emitting = true
     # asynchronously wait on timer to complete
     print("dash_start")
     await get_tree().create_timer(Constants.Dash_Strength * Constants.Dash_input_cooldown).timeout
     print("dash_end")
     is_dash_active = false
+    $GPUParticles2D.emitting = false
 
 
 func handle_cols():

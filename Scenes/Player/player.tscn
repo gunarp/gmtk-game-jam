@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dk6a56e3n3mbc"]
+[gd_scene load_steps=19 format=3 uid="uid://dk6a56e3n3mbc"]
 
 [ext_resource type="PackedScene" uid="uid://cupi7qpibwqb1" path="res://Scenes/Virtual/actor.tscn" id="1_xtkr7"]
 [ext_resource type="Script" uid="uid://5igxx24o7jgk" path="res://Scenes/Player/player.gd" id="2_5gwpl"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cofpubry5svqf" path="res://Assets/Player/walk_right_6.png" id="10_2ahak"]
 [ext_resource type="Texture2D" uid="uid://curlrogm0ctde" path="res://Assets/Player/walk_right_7.png" id="11_rukb4"]
 [ext_resource type="Texture2D" uid="uid://ldwi4qi3y8vl" path="res://Assets/Player/walk_right_8.png" id="12_4no11"]
+[ext_resource type="Texture2D" uid="uid://dmh6thvaoqqmu" path="res://Assets/Player/sparkles_sprite_sheet.png" id="13_06tpx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jbkd8"]
 size = Vector2(38, 73)
@@ -86,6 +87,15 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xvbrh"]
 size = Vector2(36, 84)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7g0yx"]
+atlas = ExtResource("13_06tpx")
+region = Rect2(21, 2, 3, 3)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oikmp"]
+lifetime_randomness = 0.31
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+
 [node name="Player" groups=["player"] instance=ExtResource("1_xtkr7")]
 scale = Vector2(0.25, 0.25)
 collision_layer = 10
@@ -128,5 +138,14 @@ collision_mask = 6
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2(0, 14)
 shape = SubResource("RectangleShape2D_xvbrh")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="4"]
+emitting = false
+amount = 16
+texture = SubResource("AtlasTexture_7g0yx")
+lifetime = 0.25
+preprocess = 0.1
+speed_scale = 0.5
+process_material = SubResource("ParticleProcessMaterial_oikmp")
 
 [connection signal="timeout" from="Timers/CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
