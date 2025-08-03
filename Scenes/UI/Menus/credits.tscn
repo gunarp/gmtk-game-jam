@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh33ykcer0g7f"]
+
+[ext_resource type="FontFile" uid="uid://dnrb5w6eq6dkl" path="res://Assets/UI/VCR_OSD_MONO_1.001.ttf" id="1_2sgw1"]
+[ext_resource type="Script" uid="uid://obeouosyknfp" path="res://Scenes/UI/Menus/credits.gd" id="1_xqn1s"]
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xqn1s")
+
+[node name="CreditsTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_2sgw1")
+text = "RETRO RE:LOOP
+
+Lead Developer
+Peter Gunarso
+
+Game Designers
+Peter Gunarso, Sunny Hu,
+Addison Co
+
+Programmers
+Peter Gunarso, Sunny Hu
+
+Level Design & Art
+Addison Co
+
+Audio Designer
+Addison Co
+
+Thanks for playing!"
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Fade" type="ColorRect" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
