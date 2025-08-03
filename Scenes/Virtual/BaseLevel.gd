@@ -34,10 +34,10 @@ func _ready():
   if level_music:
       $AudioMusicPlayer.stream = level_music
       $AudioMusicPlayer.play()
-      
+
   # prefill the timeline
   timeline.resize(MAX_TIMELIINE_LENGTH)
-  
+
   var cell_size: Vector2i = $ForegroundLayer.tile_set.tile_size
   boundry_rect = Rect2i($ForegroundLayer.get_used_rect()).abs()
 #	boundry_rect = boundry_rect.grow_side(SIDE_TOP, 500)
@@ -197,3 +197,8 @@ func _on_hit_body(hitbody: Actor, hitter: Actor):
 
 func _on_player_lost_health(_new_health):
   ui.lose_health()
+
+
+func _on_wincon_collected(body:Node2D) -> void:
+  if body.is_in_group("player"):
+    exit_level.call_deferred()

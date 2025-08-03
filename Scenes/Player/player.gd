@@ -109,7 +109,7 @@ func freeze_dash_completed():
 
 func load_state(_fnum: int, _state: PackedFloat32Array, _unfreeze_input: Vector2):
   if _unfreeze_input != Vector2.ZERO:
-    print("unfreeze velocity: ", _unfreeze_input)
+    # print("unfreeze velocity: ", _unfreeze_input)
     calculated_velocity = _unfreeze_input
     # move_cooldown = Vector2(0.5, 1) * Constants.Dash_input_cooldown
     is_dash_active = true
@@ -175,10 +175,10 @@ func handle_jump():
 func handle_dash():
   if Input.is_action_just_pressed("dash"):
     if not can_dash:
-      print("couldn't dash")
+      # print("couldn't dash")
       return
     if is_dash_active:
-      print("already dashing")
+      # print("already dashing")
       return
 
     var input_vect = Vector2(
@@ -189,7 +189,7 @@ func handle_dash():
     var default_dash_direction = Vector2(1, 0) if not $AnimatedSprite2D.flip_h else Vector2(-1, 0)
     var dash_direction = default_dash_direction if input_vect == Vector2.ZERO else input_vect
     calculated_velocity = Constants.calculate_dash_from_input(dash_direction)
-    print("dash_velocity", calculated_velocity)
+    # print("dash_velocity", calculated_velocity)
 
     move_cooldown = Vector2(0.5, 1) * Constants.Dash_input_cooldown
     is_dash_active = true

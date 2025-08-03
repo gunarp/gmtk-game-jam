@@ -10,4 +10,3 @@ func get_current_level():
 
 func increase_level_index():
   next_level_index += 1
-  next_level_index %= len(level_array)

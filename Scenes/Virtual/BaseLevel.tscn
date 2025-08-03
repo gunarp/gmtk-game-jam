@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://vsxauni78yw6"]
+[gd_scene load_steps=23 format=3 uid="uid://vsxauni78yw6"]
 
 [ext_resource type="Script" uid="uid://bv27ksx4t615q" path="res://Scenes/Virtual/BaseLevel.gd" id="1_gi0ax"]
 [ext_resource type="PackedScene" uid="uid://dk6a56e3n3mbc" path="res://Scenes/Player/player.tscn" id="2_2wr2r"]
@@ -913,4 +913,5 @@ volume_db = -10.0
 parameters/looping = true
 
 [connection signal="child_entered_tree" from="ForegroundLayer" to="." method="_on_tile_map_child_entered_tree"]
+[connection signal="body_entered" from="Wincon" to="." method="_on_wincon_collected"]
 [connection signal="child_entered_tree" from="DeathLayer" to="." method="_on_tile_map_child_entered_tree"]
