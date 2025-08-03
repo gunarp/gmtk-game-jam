@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=4 uid="uid://dxm0isvn5gx1f"]
+[gd_scene load_steps=3 format=4 uid="uid://dxm0isvn5gx1f"]
 
 [ext_resource type="PackedScene" uid="uid://vsxauni78yw6" path="res://Scenes/Virtual/BaseLevel.tscn" id="1_jgdhe"]
+[ext_resource type="AudioStream" uid="uid://b0hm5n1ytu0g5" path="res://Assets/Audio/Music/vaporwave_1.ogg" id="2_qoeng"]
 
 [node name="Level" instance=ExtResource("1_jgdhe")]
+level_music = ExtResource("2_qoeng")
 
 [node name="BackgroundImage" parent="." index="0"]
 offset_left = -29.0

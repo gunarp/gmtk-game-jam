@@ -25,11 +25,17 @@ var is_paused: bool = false
 
 signal level_ended
 
+@export var level_music: AudioStream  # Drag & drop audio files per child level in the editor
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+  if level_music:
+      $AudioMusicPlayer.stream = level_music
+      $AudioMusicPlayer.play()
+      
   # prefill the timeline
   timeline.resize(MAX_TIMELIINE_LENGTH)
-
+  
   var cell_size: Vector2i = $ForegroundLayer.tile_set.tile_size
   boundry_rect = Rect2i($ForegroundLayer.get_used_rect()).abs()
 #	boundry_rect = boundry_rect.grow_side(SIDE_TOP, 500)

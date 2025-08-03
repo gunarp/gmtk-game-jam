@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=4 uid="uid://dpauatcsghxej"]
+[gd_scene load_steps=7 format=4 uid="uid://dpauatcsghxej"]
 
 [ext_resource type="PackedScene" uid="uid://vsxauni78yw6" path="res://Scenes/Virtual/BaseLevel.tscn" id="1_r50k8"]
+[ext_resource type="AudioStream" uid="uid://ci3vbots1yxat" path="res://Assets/Audio/Music/citypop_2_113.ogg" id="2_ox14v"]
+[ext_resource type="AudioStream" uid="uid://cd7vqtgt2myyk" path="res://Assets/Audio/SFX/vinyl_step_1.mp3" id="3_et3c2"]
+[ext_resource type="AudioStream" uid="uid://krqx7njduxid" path="res://Assets/Audio/SFX/vinyl_step_2.mp3" id="4_wnirr"]
+[ext_resource type="AudioStream" uid="uid://dt3aj5660ebkg" path="res://Assets/Audio/SFX/vinyl_step_3.mp3" id="5_3rnox"]
+[ext_resource type="AudioStream" uid="uid://ct7mbmvun2v6g" path="res://Assets/Audio/SFX/vinyl_step_4.mp3" id="6_7nln5"]
 
 [node name="Level" instance=ExtResource("1_r50k8")]
+level_music = ExtResource("2_ox14v")
 
 [node name="BackgroundImage" parent="." index="0"]
 offset_left = -179.0
@@ -16,6 +22,7 @@ tile_map_data = PackedByteArray("AAD//xYAAAACAAAAAAD//xUAAAACAAAAAAD//xQAAAACAAA
 
 [node name="Player" parent="." index="4"]
 position = Vector2(34, 16)
+footsteps = [ExtResource("3_et3c2"), ExtResource("4_wnirr"), ExtResource("5_3rnox"), ExtResource("6_7nln5")]
 
 [node name="DeathLayer" parent="." index="5"]
 tile_map_data = PackedByteArray("AAAAABUAAQAAAAAAAQABABUAAQAAAAAAAQACABUAAQAAAAAAAQADABUAAQAAAAAAAQAEABUAAQAAAAAAAQAFABUAAQAAAAAAAQAGABUAAQAAAAAAAQAHABUAAQAAAAAAAQAIABUAAQAAAAAAAQAJABUAAQAAAAAAAQAKABUAAQAAAAAAAQALABUAAQAAAAAAAQAMABUAAQAAAAAAAQANABUAAQAAAAAAAQAOABUAAQAAAAAAAQAPABUAAQAAAAAAAQAQABUAAQAAAAAAAQARABUAAQAAAAAAAQASABUAAQAAAAAAAQATABUAAQAAAAAAAQAUABUAAQAAAAAAAQAVABUAAQAAAAAAAQAWABUAAQAAAAAAAQAXABUAAQAAAAAAAQAYABUAAQAAAAAAAQAZABUAAQAAAAAAAQAaABUAAQAAAAAAAQAbABUAAQAAAAAAAQAcABUAAQAAAAAAAQAdABUAAQAAAAAAAQAeABUAAQAAAAAAAQAfABUAAQAAAAAAAQAgABUAAQAAAAAAAQAhABUAAQAAAAAAAQAiABUAAQAAAAAAAQAjABUAAQAAAAAAAQAkABUAAQAAAAAAAQAlABUAAQAAAAAAAQAmABUAAQAAAAAAAQAnABUAAQAAAAAAAQA=")
