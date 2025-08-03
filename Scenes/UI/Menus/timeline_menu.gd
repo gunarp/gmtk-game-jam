@@ -108,6 +108,8 @@ func _process(_delta: float) -> void:
     ignore_input = false
     return
 
+  # read movement inputs to project movement vector on screen
+
   if Input.is_action_just_pressed("freeze"):
     # print("current scroll value: ", scroll_container.scroll_horizontal)
     # var dest_frame = 10
