@@ -100,13 +100,23 @@ func _process(_delta: float) -> void:
     var selection = get_selected_value()
     if selection is TimelineMenuItem:
       var s = selection as TimelineMenuItem
-      unfreeze.emit(s.frame_number_real)
+      # true = unfreeze after displaying frame
+      unfreeze.emit(s.frame_number_real, true)
 
   if Input.is_action_pressed("scrub_back"):
     _on_previous_button_pressed()
+    var selection = get_selected_value()
+    if selection is TimelineMenuItem:
+      var s = selection as TimelineMenuItem
+      # false = only display frame, do NOT unfreeze
+      unfreeze.emit(s.frame_number_real, false)
 
   if Input.is_action_pressed("scrub_forward"):
     _on_next_button_pressed()
+    var selection = get_selected_value()
+    if selection is TimelineMenuItem:
+      var s = selection as TimelineMenuItem
+      unfreeze.emit(s.frame_number_real, false)
 
 
 func _set_selection():
