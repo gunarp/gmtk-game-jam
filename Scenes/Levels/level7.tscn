@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=4 uid="uid://dpauatcsghxej"]
+[gd_scene load_steps=3 format=4 uid="uid://dpauatcsghxej"]
 
 [ext_resource type="PackedScene" uid="uid://vsxauni78yw6" path="res://Scenes/Virtual/BaseLevel.tscn" id="1_r50k8"]
 [ext_resource type="AudioStream" uid="uid://ci3vbots1yxat" path="res://Assets/Audio/Music/citypop_2_113.ogg" id="2_ox14v"]
-[ext_resource type="AudioStream" uid="uid://bcpgiuadc36h3" path="res://Assets/Audio/SFX/dash_1.mp3" id="3_qmk3e"]
 
 [node name="Level" instance=ExtResource("1_r50k8")]
 level_music = ExtResource("2_ox14v")
@@ -22,7 +21,6 @@ position = Vector2(280, 150)
 
 [node name="Player" parent="." index="5"]
 position = Vector2(34, 16)
-dash_sfx_stream = ExtResource("3_qmk3e")
 
 [node name="DeathLayer" parent="." index="6"]
 tile_map_data = PackedByteArray("AAAAABUAAQAAAAAAAQABABUAAQAAAAAAAQACABUAAQAAAAAAAQADABUAAQAAAAAAAQAEABUAAQAAAAAAAQAFABUAAQAAAAAAAQAGABUAAQAAAAAAAQAHABUAAQAAAAAAAQAIABUAAQAAAAAAAQAJABUAAQAAAAAAAQAKABUAAQAAAAAAAQALABUAAQAAAAAAAQAMABUAAQAAAAAAAQANABUAAQAAAAAAAQAOABUAAQAAAAAAAQAPABUAAQAAAAAAAQAQABUAAQAAAAAAAQARABUAAQAAAAAAAQASABUAAQAAAAAAAQATABUAAQAAAAAAAQAUABUAAQAAAAAAAQAVABUAAQAAAAAAAQAWABUAAQAAAAAAAQAXABUAAQAAAAAAAQAYABUAAQAAAAAAAQAZABUAAQAAAAAAAQAaABUAAQAAAAAAAQAbABUAAQAAAAAAAQAcABUAAQAAAAAAAQAdABUAAQAAAAAAAQAeABUAAQAAAAAAAQAfABUAAQAAAAAAAQAgABUAAQAAAAAAAQAhABUAAQAAAAAAAQAiABUAAQAAAAAAAQAjABUAAQAAAAAAAQAkABUAAQAAAAAAAQAlABUAAQAAAAAAAQAmABUAAQAAAAAAAQAnABUAAQAAAAAAAQA=")
