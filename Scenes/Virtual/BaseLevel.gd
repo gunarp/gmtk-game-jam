@@ -73,7 +73,6 @@ func _toggle_pause_subtree():
   is_paused = not is_paused
   print("toggling paused to: ", is_paused)
   if is_paused:
-    $TimelineMenu.show()
     $TimelineMenu.display_frames_on_pause(timeline, current_timeline_pos, num_timelines_looped, MAX_TIMELIINE_LENGTH)
   else:
     $TimelineMenu.hide()

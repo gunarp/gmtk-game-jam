@@ -55,14 +55,15 @@ func _ready() -> void:
   #EXTRACT
 
   # move scroll position to end, after ScrollContainer is ready
-  set_scroll_at_end.call_deferred()
+  # set_scroll_at_end.call_deferred()
 
 
 func set_scroll_at_end():
   # TODO: make this scroll to the center of the last object in the list
   targetScroll = max_scroll
-  print("scrolling to ", max_scroll)
-  scroll_container.scroll_horizontal = max_scroll
+  show()
+  await _tween_scroll(max_scroll)
+  _select_deselect_highlight()
 
 
 func _on_visibility_changed():
@@ -73,6 +74,8 @@ func _on_visibility_changed():
 func display_frames_on_pause(timeline: Array[Dictionary], current_timeline_pos: int, num_timelines_looped: int, max_frames: int) -> void:
   print("stopped on frame: ", num_timelines_looped * max_frames + current_timeline_pos)
   print(timeline[current_timeline_pos])
+
+  set_scroll_at_end()
   # trying to dynamically generate a texture - failing !
   # var test_texture = load("res://Assets/Player/walk_left_7.png")
   # var temp = TextureRect.new()
